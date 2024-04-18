@@ -20,7 +20,17 @@
    DATABASE_URL=your_database_url
    ```
    Copy the content from .env.example into a .env file in the server directory. Replace "your_secret_key" with a secure key for JWT token encryption and "your_database_url" with the URL for your PostgreSQL database.
-4. Set up environment variables and start the development servers:
+
+4. Set up the database
+   ```bash
+      cd server && npx prisma migrate dev
+   ```
+
+   ```bash
+      npx prisma generate
+   ```
+
+5. Set up environment variables and start the development servers:
 
    - Open one terminal for the server:
      ```bash
