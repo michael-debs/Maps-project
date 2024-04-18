@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import useFetch from "./useFetch";
+import axios from "axios";
 
 const AuthContext = createContext();
 
@@ -10,13 +10,24 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const fetch = useFetch();
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authIsLoading, setAuthIsLoading] = useState(false);
+  const [fetch, setFetch] = useState(axios.create());
+
 
   useEffect(() => {
+    const instance = axios.create({
+      baseURL: import.meta.env.VITE_BASE_URL,
+    });
+
+    if (isAuthenticated) {
+      instance.defaults.headers.common["Authorization"] = token;
+    }
+
+    setFetch(instance);
+
     validateToken({ token });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -80,6 +91,7 @@ export function AuthProvider({ children }) {
         register,
         authIsLoading,
         isAuthenticated,
+        token
       }}
     >
       {children}
