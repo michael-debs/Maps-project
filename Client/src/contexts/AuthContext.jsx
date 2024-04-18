@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import useFetch from "./useFetch";
+import axios from "axios";
 
 const AuthContext = createContext();
 
@@ -10,21 +10,31 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const fetch = useFetch();
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authIsLoading, setAuthIsLoading] = useState(false);
 
+  const fetch = axios.create({
+    baseURL: import.meta.env.VITE_BASE_URL,
+  });
+  if (isAuthenticated) {
+    fetch.defaults.headers.common["Authorization"] = token;
+  }
+
   useEffect(() => {
-    validateToken({ token });
+
+
+    if (token) {
+      validateToken({ token });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function validateToken({ token }) {
     try {
       setAuthIsLoading(true);
-      const response = await fetch.post("/validate-token", { token });
+      const response = await fetch.get("/validate-token", { token });
       if (response.data.token) {
         setUser(response.data.user);
         setIsAuthenticated(true);
@@ -80,6 +90,7 @@ export function AuthProvider({ children }) {
         register,
         authIsLoading,
         isAuthenticated,
+        token
       }}
     >
       {children}
