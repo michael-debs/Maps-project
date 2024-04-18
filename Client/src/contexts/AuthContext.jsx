@@ -22,6 +22,7 @@ export function AuthProvider({ children }) {
     fetch.defaults.headers.common["Authorization"] = token;
   }
 
+
   useEffect(() => {
 
 
