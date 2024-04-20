@@ -20,7 +20,7 @@ async function register(req, res) {
     const response = await registerUser(req.body);
 
     if (!response) {
-      res.status(400).json("User already exists");
+      res.status(409).json("User already exists");
     }
     res.json(response);
   } catch (error) {
