@@ -36,7 +36,6 @@ export function AuthProvider({ children }) {
     try {
       setAuthIsLoading(true);
       const response = await fetch.get("/auth/validate-token", { token });
-      console.log(response);
       if (response.data.token) {
         setUser(response.data.user);
         setIsAuthenticated(true);
