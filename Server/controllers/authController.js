@@ -1,5 +1,9 @@
 const jwt = require("jsonwebtoken");
-const { registerUser, loginUser, findUserWithId } = require("../services/userService");
+const {
+  registerUser,
+  loginUser,
+  findUserWithId,
+} = require("../services/userService");
 
 async function login(req, res) {
   try {
@@ -26,10 +30,9 @@ async function register(req, res) {
 
 async function validateToken(req, res) {
   try {
-
     const { id } = req.user;
-
-    const user = await findUserWithId(id)
+    const token = req.token
+    const user = await findUserWithId({ id });
 
     res.json({
       token,
@@ -45,10 +48,10 @@ async function validateToken(req, res) {
   } catch (error) {
     res.status(500).json({ error: error.message || "Internal server error" });
   }
-};
+}
 
 module.exports = {
   login,
   register,
-  validateToken
+  validateToken,
 };

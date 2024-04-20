@@ -18,7 +18,7 @@ export function AuthProvider({ children }) {
   const fetch = axios.create({
     baseURL: import.meta.env.VITE_BASE_URL,
   });
-  if (isAuthenticated) {
+  if (token) {
     fetch.defaults.headers.common["Authorization"] = token;
   }
 
@@ -35,7 +35,8 @@ export function AuthProvider({ children }) {
   async function validateToken({ token }) {
     try {
       setAuthIsLoading(true);
-      const response = await fetch.get("/validate-token", { token });
+      const response = await fetch.get("/auth/validate-token", { token });
+      console.log(response);
       if (response.data.token) {
         setUser(response.data.user);
         setIsAuthenticated(true);
@@ -51,7 +52,7 @@ export function AuthProvider({ children }) {
   async function login({ email, password }) {
     try {
       setAuthIsLoading(true);
-      const response = await fetch.post("/login", { email, password });
+      const response = await fetch.post("/auth/login", { email, password });
       const token = response.data.token;
       localStorage.setItem("token", token);
       setToken(token);
