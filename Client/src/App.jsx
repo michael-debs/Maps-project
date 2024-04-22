@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import { useAuth } from "./contexts/AuthContext";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
+import ProfilePage from "./pages/ProfilePage/Profile";
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -39,6 +40,7 @@ function App() {
           }
         />
         <Route path="*" element={<NotFoundPage />} />
+        <Route path="/Profile" element={<ProfilePage />} />
       </Routes>
     </>
   );
