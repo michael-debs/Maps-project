@@ -9,6 +9,10 @@ async function login(req, res) {
   try {
     const response = await loginUser(req.body);
 
+    if (response.error) {
+      return res.status(401).json({ error: response.error });
+    }
+
     res.json(response);
   } catch (error) {
     res.status(500).json({ error: error.message || "Internal server error" });
