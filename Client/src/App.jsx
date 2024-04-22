@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import { useAuth } from "./contexts/AuthContext";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
+import Login from "./pages/auth/LoginPage/Login";
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -38,6 +39,20 @@ function App() {
             )
           }
         />
+        <Route
+          path="/login"
+          element={
+            isAuthenticated ? (
+              <NavigateWithAlert
+                message={"You Are Already Logged In"}
+                to="/"
+              />
+            ) : (
+              <Login />
+            )
+          }
+        />
+
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
