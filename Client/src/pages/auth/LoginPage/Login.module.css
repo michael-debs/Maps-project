@@ -74,7 +74,7 @@
     }
 
     .title,
-    .login,
+    .register,
     .form {
         transform: translateX(0) translateY(-15vh);
     }
