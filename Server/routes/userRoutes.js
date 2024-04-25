@@ -6,16 +6,16 @@ const authenticationMiddleware = require("../middlewares/authenticationMiddlewar
 const authorizationMiddleware = require("../middlewares/authorizationMiddleware");
 const authController = require("../controllers/authController");
 
-router.get("/:id", userController.getUser);
+router.get("/:userId", userController.getUser);
 router.post("/", authController.register);
 router.delete(
-  "/:id",
+  "/:userId",
   authenticationMiddleware.authenticateToken,
   authorizationMiddleware.authorizeUserAction,
   userController.deleteUser
 );
 router.put(
-  "/:id",
+  "/:userId",
   authenticationMiddleware.authenticateToken,
   authorizationMiddleware.authorizeUserAction,
   userController.updateUser
