@@ -12,6 +12,7 @@ function Form({
   globalValidation,
 }) {
   const [formData, setFormData] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -26,7 +27,8 @@ function Form({
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    setIsLoading(true)
     e.preventDefault();
     const formErrors = {};
 
@@ -49,10 +51,11 @@ function Form({
     }
 
     if (Object.keys(formErrors).length === 0) {
-      onSubmit(formData);
+      await onSubmit(formData);
     } else {
       setErrors(formErrors);
     }
+    setIsLoading(false)
   };
   return (
     <form className={className} onSubmit={handleSubmit}>
@@ -90,7 +93,9 @@ function Form({
           )}
         </div>
       ))}
-      <Button {...submitButtonProps}>{submitButtonProps.children}</Button>
+      <Button {...submitButtonProps} disabled={isLoading}>
+        {submitButtonProps.children}
+      </Button>
     </form>
   );
 }
