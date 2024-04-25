@@ -1,6 +1,7 @@
 import styles from "./ProfileHeader.module.css";
 import profile from "./profile.png";
 import edit from "./edit.png";
+import PropTypes from "prop-types";
 
 function ProfileHeader({ user }) {
   return (
@@ -20,5 +21,15 @@ function ProfileHeader({ user }) {
     </div>
   );
 }
+
+ProfileHeader.propTypes = {
+  user: PropTypes.shape({
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    bio: PropTypes.string,
+    profilePicture: PropTypes.string
+  }),
+};
 
 export default ProfileHeader;
