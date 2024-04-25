@@ -1,19 +1,20 @@
 import styles from "./Profile.module.css";
-import ProfileHeader from "./components/ProfileHeader";
-import ProfilePosts from "./components/ProfilePosts";
-import ProfileTabs from "./components/ProfileTabs";
+import ProfileHeader from "./components/ProfileH/ProfileHeader";
+import { useParams } from "react-router-dom";
+import useUser from "../../hooks/useUser";
 
 const ProfilePage = () => {
-  return <main className={styles.container}>
-    ProfilePage
-    <div className={styles.header}>
-      <ProfileHeader />
-
-    </div>
-    <div className={styles.body}>
-      <ProfileTabs />
-      <ProfilePosts />
-    </div>
-  </main>
+  const { id } = useParams();
+  const user = useUser(id);
+  if (!user) {
+    return <h1>loading...</h1>;
+  }
+  return (
+    <main className={styles.container}>
+      <div className={styles.header}>
+        <ProfileHeader user={user} />
+      </div>
+    </main>
+  );
 };
-export default ProfilePage
+export default ProfilePage;

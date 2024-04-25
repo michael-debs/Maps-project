@@ -44,18 +44,14 @@ function App() {
           path="/login"
           element={
             isAuthenticated ? (
-              <NavigateWithAlert
-                message={"You Are Already Logged In"}
-                to="/"
-              />
+              <NavigateWithAlert message={"You Are Already Logged In"} to="/" />
             ) : (
               <Login />
             )
           }
         />
-
+        <Route path="/Profile/:id" element={<ProfilePage />} />
         <Route path="*" element={<NotFoundPage />} />
-        <Route path="/Profile" element={<ProfilePage />} />
       </Routes>
     </>
   );

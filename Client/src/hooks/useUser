@@ -1,0 +1,23 @@
+import { useEffect, useState } from "react";
+import { getUserProfile } from "../services/UserService";
+
+const useUser = (userId) => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userData = await getUserProfile(userId);
+        setUser(userData);
+      } catch (error) {
+        console.error("Failed to fetch user profile:", error);
+      }
+    };
+
+    fetchUserData();
+  }, [userId]);
+
+  return user;
+};
+
+export default useUser;
