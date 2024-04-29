@@ -1,5 +1,5 @@
 import styles from "./Profile.module.css";
-import ProfileHeader from "./components/ProfileH/ProfileHeader";
+import UserProfileHeader from "./components/ProfileHeader/UserProfileHeader";
 import { useParams } from "react-router-dom";
 import useUser from "../../hooks/useUser";
 
@@ -12,7 +12,7 @@ const ProfilePage = () => {
   return (
     <main className={styles.container}>
       <div className={styles.header}>
-        <ProfileHeader user={user} />
+        <UserProfileHeader user={user} />
       </div>
     </main>
   );
