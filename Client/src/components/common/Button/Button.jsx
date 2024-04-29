@@ -19,6 +19,9 @@ function Button({ children, onClick, variant, size, disabled, className, ...rest
       onClick={onClick}
       disabled={disabled}
       {...rest}
+      style={{
+        opacity: disabled ? 0.7 : 1
+      }}
     >
       {children}
     </button>
