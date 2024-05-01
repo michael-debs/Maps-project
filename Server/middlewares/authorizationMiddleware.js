@@ -4,8 +4,8 @@ async function authorizeUserAction(req, res, next) {
   const userIdFromBody = req.body.userId; // Assuming userId is in body
 
   if (
-    userIdFromToken !== userIdFromParams &&
-    userIdFromToken !== userIdFromBody
+    userIdFromToken != userIdFromParams &&
+    userIdFromToken != userIdFromBody
   ) {
     return res.status(403).json({
       message: "Forbidden: You are not authorized to do this action",

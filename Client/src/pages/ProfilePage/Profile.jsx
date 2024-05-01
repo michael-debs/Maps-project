@@ -1,11 +1,11 @@
 import styles from "./Profile.module.css";
 import UserProfileHeader from "./components/ProfileHeader/UserProfileHeader";
 import { useParams } from "react-router-dom";
-import useUser from "../../hooks/useUser";
+import useUser from "../../hooks/useUser.js";
 
 const ProfilePage = () => {
   const { id } = useParams();
-  const user = useUser(id);
+  const { user } = useUser(id);
   if (!user) {
     return <h1>loading...</h1>;
   }

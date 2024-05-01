@@ -7,7 +7,6 @@ import { useAuth } from "../../../../contexts/AuthContext";
 
 function UserProfileHeader({ user }) {
   const { isAuthenticated, user: authenticatedUser } = useAuth();
-  console.log("Is Authenticated:", isAuthenticated);
 
   const renderBio = () => {
     return user.bio ? user.bio : <i>No bio</i>;
@@ -38,6 +37,7 @@ function UserProfileHeader({ user }) {
 
 UserProfileHeader.propTypes = {
   user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     firstName: PropTypes.string.isRequired,
     lastName: PropTypes.string.isRequired,
     bio: PropTypes.string,
