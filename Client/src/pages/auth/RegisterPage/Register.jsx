@@ -1,12 +1,10 @@
 import Form from "../../../components/common/FormComponents/Form/Form";
 import styles from "./Register.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useAuth } from "../../../contexts/AuthContext";
 import { toast } from "react-toastify";
 import GoHomeButton from "../components/GoHomeButton/GoHomeButton";
-
-const serverURL = import.meta.env.VITE_BASE_URL;
+import axios from "../../../utils/axiosWithAuth"
 
 function Register() {
   const { register } = useAuth();
@@ -14,7 +12,7 @@ function Register() {
 
   async function handleSubmit(formData) {
     try {
-      const promise = axios.post(serverURL + "/user", formData);
+      const promise = axios.post("/user", formData);
       toast.promise(promise, {
         pending: "Loading",
         success: "You Are Now Logged In",

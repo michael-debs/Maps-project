@@ -13,7 +13,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [authIsLoading, setAuthIsLoading] = useState(false);
+  const [authIsLoading, setAuthIsLoading] = useState(true);
 
   const fetch = axios.create({
     baseURL: import.meta.env.VITE_BASE_URL,
@@ -82,6 +82,10 @@ export function AuthProvider({ children }) {
     setIsAuthenticated(false);
   }
 
+  async function updateUser(user) {
+    setUser(user)
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -89,6 +93,7 @@ export function AuthProvider({ children }) {
         login,
         logout,
         register,
+        updateUser,
         authIsLoading,
         isAuthenticated,
         token
