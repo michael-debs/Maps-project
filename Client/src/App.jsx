@@ -8,7 +8,7 @@ import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import ProfilePage from "./pages/ProfilePage/Profile";
 import Login from "./pages/auth/LoginPage/Login";
-import EditUserProfileHeader from "./pages/EditProfilePage/EditUserProfileHeader"; 
+import EditUserProfileHeader from "./pages/EditProfilePage/EditUserProfileHeader";
 function App() {
   const { isAuthenticated } = useAuth();
 

@@ -9,7 +9,7 @@ function Input({
   size,
   name,
   label,
-  ...rest
+    ...rest
 }) {
   const inputClasses = [
     styles.input,

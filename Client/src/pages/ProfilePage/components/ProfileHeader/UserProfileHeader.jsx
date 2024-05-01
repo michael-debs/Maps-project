@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./UserProfileHeader.module.css";
-import defaultProfile from "../../../../assets/images/defaultProfile.png"
+import defaultProfile from "../../../../assets/images/defaultProfile.png";
 import editPencil from "../../../../assets/images/editPencil.png";
 import PropTypes from "prop-types";
 import { useAuth } from "../../../../contexts/AuthContext";
@@ -24,14 +24,20 @@ function UserProfileHeader({ user }) {
 
   return (
     <div className={styles.container}>
-      <img className={styles.picture} src={user.profilePicture || defaultProfile} alt="Profile" />
+      <img
+        className={styles.picture}
+        src={user.profilePicture || defaultProfile}
+        alt="Profile"
+      />
       <div className={styles.info}>
         <div className={styles.name}>
           {user.firstName} {user.lastName}
         </div>
         <div className={styles.bio}>{renderBio()}</div>
       </div>
-      {isAuthenticated && authenticatedUser.id == user.id && renderEditProfileLink()}
+      {isAuthenticated &&
+        authenticatedUser.id == user.id &&
+        renderEditProfileLink()}
     </div>
   );
 }
