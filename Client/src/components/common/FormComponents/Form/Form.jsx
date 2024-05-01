@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Input from "../Input/Input";
 import Button from "../../Button/Button";
+import TextArea from "../TextArea/textArea";
 import { formPropTypes } from "../../../../constants/PropTypes";
 import ErrorIcon from "../../../Icons/ErrorIcon";
 
@@ -66,15 +67,26 @@ function Form({
           }}
           key={i}
         >
-          <Input
-            onChange={handleChange}
-            label={field.label}
-            type={field.type}
-            id={field.name}
-            name={field.name}
-            value={formData[field.name] || ""}
-            placeholder={field.placeholder}
-          />
+          {field.type === "textarea" ? (
+            <TextArea
+              onChange={handleChange}
+              label={field.label}
+              value={formData[field.name] || ""}
+              placeholder={field.placeholder}
+              name={field.name}
+            />
+          ) : (
+            <Input
+              onChange={handleChange}
+              label={field.label}
+              type={field.type}
+              id={field.name}
+              name={field.name}
+              value={formData[field.name] || ""}
+              placeholder={field.placeholder}
+            />
+          )}
+
           {errors[field.name] && (
             <div
               style={{

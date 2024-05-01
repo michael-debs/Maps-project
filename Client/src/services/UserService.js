@@ -17,3 +17,10 @@ export async function updateUserProfile(userId, data) {
   const userData = await response.data;
   return userData;
 }
+
+export async function deleteUser(userId) {
+  const response = await axios.delete(`/user/${userId}`);
+  if (response.status !== 200) {
+    throw new Error(`Failed to delete user with ID ${userId}`);
+  }
+}

@@ -8,6 +8,7 @@ import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import ProfilePage from "./pages/ProfilePage/Profile";
 import Login from "./pages/auth/LoginPage/Login";
+
 function App() {
   const { isAuthenticated } = useAuth();
 
