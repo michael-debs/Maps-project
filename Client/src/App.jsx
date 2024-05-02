@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ProfilePage from "./pages/ProfilePage/Profile";
 import Login from "./pages/auth/LoginPage/Login";
 import HomePage from "./pages/Home/HomePage";
+
 function App() {
   const { isAuthenticated } = useAuth();
 
