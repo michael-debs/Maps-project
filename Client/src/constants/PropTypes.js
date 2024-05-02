@@ -23,7 +23,18 @@ export const formPropTypes = {
       required: PropTypes.bool,
       id: PropTypes.string,
       value: PropTypes.string,
-      validation: PropTypes.func
+      validation: PropTypes.func,
     })
   ).isRequired,
+};
+
+export const userPropTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    bio: PropTypes.string,
+    profilePicture: PropTypes.string,
+    email: PropTypes.string.isRequired,
+  }),
 };
