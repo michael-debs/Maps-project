@@ -1,21 +1,46 @@
+import { useRef, useEffect, useState } from "react";
 import * as maptiler from "@maptiler/sdk";
-import { useEffect, useRef } from "react";
+import "@maptiler/sdk/dist/maptiler-sdk.css";
 
 const apiKey = import.meta.env.VITE_MAPTILER_KEY;
 
-function useMap(container) {
+const useMap = (container) => {
   const map = useRef(null);
-  useEffect(() => {
-    if (map.current) return;
+  const [markers, setMarkers] = useState([]);
+  const [popups, setPopups] = useState([]);
 
-    map.current = new maptiler.Map({
-      container: container,
-      apiKey: apiKey,
-      geolocate: "POINT",
-      style: "https://demotiles.maplibre.org/style.json",
-      zoom: 8,
-    });
+  const addMarker = (lngLat, options, id) => {
+    const marker = new maptiler.Marker(options)
+      .setLngLat(lngLat)
+      .addTo(map.current);
+
+    setMarkers((prevMarkers) => [...prevMarkers, { marker, id }]);
+    return marker;
+  };
+
+  const addPopup = (lngLat, id, options, html) => {
+    const popup = new maptiler.Popup({ closeOnClick: false, ...options })
+      .setLngLat(lngLat)  
+      .setHTML(html)
+      .addTo(map.current  );
+    setPopups((prevMarkers) => [...prevMarkers, { popup, id }]);
+    return popup
+  };
+
+  useEffect(() => {
+    if (!map.current) {
+      map.current = new maptiler.Map({
+        container: container,
+        apiKey: apiKey,
+        geolocate: "POINT",
+        style: "https://demotiles.maplibre.org/style.json",
+        zoom: 7,
+        minZoom: 8,
+      });
+    }
   }, [container]);
-}
+
+  return { addMarker, addPopup };
+};
 
 export default useMap;
