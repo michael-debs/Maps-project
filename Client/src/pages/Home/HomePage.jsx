@@ -29,7 +29,8 @@ function useCurrent(map) {
           [post.lng, post.lat],
           post.id,
           { closeButton: false },
-          `<a class="resetA" href="/posts/${post.id}"><div class="post"><h1>${post.title}</h1><br><p>${post.content}</p></div></a>`
+          // `<a class="resetA" href="/posts/${post.id}"><div class="post"><h1>${post.title}</h1><br><p>${post.content}</p></div></a>`
+          `<div class="post"><h1>${post.title}</h1><br><p>${post.content}</p> <a href="/posts/${post.id}">Read More</a> </div>`
         );
         const htmlElement = popup.getElement()
         console.log(htmlElement);
@@ -41,6 +42,3 @@ function useCurrent(map) {
 
 export default HomePage;
 
-function Component({ title }) {
-  return <h1>{title}</h1>;
-}

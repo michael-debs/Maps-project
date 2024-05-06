@@ -1,9 +1,23 @@
 const prisma = require("./prismaService");
 
 const postService = {
-  getAllPosts: async () => {
+  getAllParentPosts: async () => {
     try {
-      return await prisma.post.findMany();
+      return await prisma.post.findMany({
+        where: {
+          parentPostId: null,
+        },
+        include: {
+          user: {
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true,
+              profilePicture: true,
+            },
+          },
+        },
+      });
     } catch (error) {
       throw new Error(`Error fetching posts: ${error.message}`);
     }
@@ -31,7 +45,16 @@ const postService = {
 
   createPost: async (data) => {
     try {
-      return await prisma.post.create({ data });
+      return await prisma.post.create({
+        data: {
+          title: data.title,
+          content: data.content,
+          lng: data.lng,
+          lat: data.lat,
+          userId: data.userId,
+          parentPostId: data.parentPostId || null,
+        },
+      });
     } catch (error) {
       throw new Error(`Error creating post: ${error.message}`);
     }

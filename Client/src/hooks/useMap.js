@@ -34,8 +34,10 @@ const useMap = (container) => {
         apiKey: apiKey,
         geolocate: "POINT",
         style: "https://demotiles.maplibre.org/style.json",
+        // style: maptiler.MapStyle.SATELLITE,
         zoom: 7,
-        minZoom: 8,
+        draggable: true,
+        // minZoom: 8,
       });
     }
   }, [container]);

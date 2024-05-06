@@ -3,7 +3,7 @@ const postService = require("../services/postService");
 const postController = {
   getAllPosts: async (req, res) => {
     try {
-      const posts = await postService.getAllPosts();
+      const posts = await postService.getAllParentPosts();
       res.json(posts);
     } catch (error) {
       res.status(500).json({ error: "Internal Server Error" });
@@ -32,7 +32,6 @@ const postController = {
       const post = await postService.createPost({
         title: postData.title,
         content: postData.content,
-        likes: postData.likes,
         lng: postData.lng,
         lat: postData.lat,
         userId: user.id,
