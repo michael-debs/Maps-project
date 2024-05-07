@@ -1,16 +1,11 @@
-// PostPage.jsx
-
-import React from "react";
-// PostPage.jsx
-
 import { useParams } from "react-router-dom";
 import usePost from "../../hooks/usePost";
 import defaultProfile from "../../assets/images/defaultProfile.png";
 import styles from "./PostPage.module.css";
 
 function PostPage() {
-  const { postId } = useParams();
-  const { post } = usePost(postId);
+  const { id } = useParams();
+  const { post } = usePost(id);
 
   return (
     <div className={styles.body}>

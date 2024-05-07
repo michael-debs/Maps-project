@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getPost } from "../services/PostService";
+import { getPostWithId } from "../services/PostService";
 
 const usePost = (postId) => {
   const [post, setPost] = useState(null);
@@ -10,7 +10,7 @@ const usePost = (postId) => {
     const fetchPost = async () => {
       setIsLoading(true);
       try {
-        const postData = await getPost(postId);
+        const postData = await getPostWithId(postId);
         setPost(postData);
       } catch (error) {
         setError(error);

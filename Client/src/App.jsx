@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ProfilePage from "./pages/ProfilePage/Profile";
 import Login from "./pages/auth/LoginPage/Login";
 import HomePage from "./pages/Home/HomePage";
+import PostPage from "./pages/PostPage/PostPage"
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -53,6 +54,7 @@ function App() {
           }
         />
         <Route path="/user/:id" element={<ProfilePage />} />
+        <Route path="/posts/:id" element={<PostPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>

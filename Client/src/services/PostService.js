@@ -5,18 +5,18 @@ export async function getAllPosts() {
   if (response.status != 200) {
     throw new Error(`Failed to fetch posts`);
   }
-  const userData = await response.data;
-  return userData;
+  const postData = await response.data;
+  return postData;
 }
 
-// export async function getPostWithId(id) {
-//   const response = await axios.put(`/posts/${userId}`, data);
-//   if (response.status != 200) {
-//     throw new Error(`Failed to update user profile for user ID ${userId}`);
-//   }
-//   const userData = await response.data;
-//   return userData;
-// }
+export async function getPostWithId(id) {
+  const response = await axios.get(`/posts/${id}`);
+  if (response.status != 200) {
+    throw new Error(`Failed to get post with id ${id}`);
+  }
+  const postData = await response.data;
+  return postData;
+}
 
 // export async function deleteUser(userId) {
 //   const response = await axios.delete(`/posts/${userId}`);
