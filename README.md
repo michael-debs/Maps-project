@@ -1,44 +1,44 @@
 ## Installation
 
-1. Clone the repository:
+1. Cloning the repository:
 
-   ```bash
-   git clone https://github.com/michael-debs/Maps-project.git
-   ```
-2. Install dependencies for both frontend and backend:
+```bash
+git clone https://github.com/michael-debs/Maps-project.git
+```
+2. Install Dependencies:
+After cloning the repository, navigate to the `Client` directory and install the dependencies by running:
+```bash
+cd client
+npm install
+ ```
+Then, navigate to the `Server` directory and install the dependencies by running:
+```bash
+cd ../server
+npm install
+```
 
-   ```bash
-   cd project-name
-   cd client && npm install
-   cd ../server && npm install
-   cd ..
-   ```
-3. Set up environment variables:
-   ```bash
-   PORT=3001
-   JWT_SECRET=your_secret_key
-   DATABASE_URL=your_database_url
-   ```
-   Copy the content from .env.example into a .env file in the server directory. Replace "your_secret_key" with a secure key for JWT token encryption and "your_database_url" with the URL for your PostgreSQL database.
+4. Configure Environment Variables:
+Duplicate the `.env.example` file in both the client and server directories. Rename the duplicated file in the server directory to `.env` and the one in the client directory to `.env.local.`
+Configure your environment variables by editing the .env files according to the instructions provided for each variable.
 
-4. Set up the database
-   ```bash
-      cd server && npx prisma migrate dev
-   ```
+6. Set up the Database:
+In the `server` directory, run the following command to create and apply migrations:
+```bash
+ npx prisma migrate dev
+```
+Then, generate Prisma client by running:
+```bash
+ npx prisma generate 
+```
 
-   ```bash
-      npx prisma generate
-   ```
+8. Start the Development Servers:
+Run the following command in the `Client` directory to start the client-side development server:
+```bash
+npm run dev
+```
+Similarly, start the server-side development server by running the following command in the server directory:
+```bash
+npm run dev
+```
 
-5. Set up environment variables and start the development servers:
-
-   - Open one terminal for the server:
-     ```bash
-     cd server && npm run dev
-     ```
-
-   - Open another terminal for the client:
-     ```bash
-     cd ../client && npm run dev
-     ```
 
