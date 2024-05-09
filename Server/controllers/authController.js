@@ -1,9 +1,17 @@
 const jwt = require("jsonwebtoken");
-const { registerUser, loginUser, findUserWithId } = require("../services/userService");
+const {
+  registerUser,
+  loginUser,
+  findUserWithId,
+} = require("../services/userService");
 
 async function login(req, res) {
   try {
     const response = await loginUser(req.body);
+
+    if (response.error) {
+      return res.status(401).json({ error: response.error });
+    }
 
     res.json(response);
   } catch (error) {
@@ -16,7 +24,7 @@ async function register(req, res) {
     const response = await registerUser(req.body);
 
     if (!response) {
-      res.status(400).json("User already exists");
+      res.status(409).json("User already exists");
     }
     res.json(response);
   } catch (error) {
@@ -26,10 +34,9 @@ async function register(req, res) {
 
 async function validateToken(req, res) {
   try {
-
     const { id } = req.user;
-
-    const user = await findUserWithId(id)
+    const token = req.token
+    const user = await findUserWithId({ id });
 
     res.json({
       token,
@@ -45,10 +52,10 @@ async function validateToken(req, res) {
   } catch (error) {
     res.status(500).json({ error: error.message || "Internal server error" });
   }
-};
+}
 
 module.exports = {
   login,
   register,
-  validateToken
+  validateToken,
 };

@@ -120,12 +120,10 @@ async function registerUser({ firstName, lastName, email, password }) {
       return;
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-
     // Create new 4rfv
     const newUser = await createUser({
       email,
-      password: hashedPassword,
+      password,
       firstName,
       lastName,
     });
@@ -159,12 +157,12 @@ async function loginUser({ email, password }) {
   try {
     const user = await findUserWithEmail({ email });
     if (!user) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return { error: "Invalid email or password" };
     }
 
-    const passwordMatch = await bcrypt.compare(password, user.password);
+    const passwordMatch = await bcrypt.compare(password, user.password)
     if (!passwordMatch) {
-      return res.status(401).json({ error: "Invalid email or password" });
+      return { error: "Invalid email or password" };
     }
 
     const token = jwt.sign(

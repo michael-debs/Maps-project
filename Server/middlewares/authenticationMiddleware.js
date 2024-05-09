@@ -16,6 +16,7 @@ async function authenticateToken(req, res, next) {
       return res.status(403).json({ message: "Invalid token" });
     }
     req.user = decoded;
+    req.token = token
     next();
   });
 }
