@@ -1,0 +1,61 @@
+body{
+    background-color:#f0f8ff ;
+}
+.container {
+    display: flex;
+    flex-direction: center;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f8ff;
+    padding: 20px;
+}
+  
+  .pictureContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+  }
+  
+  .picture {
+    width: 400px;
+    height: 400px;
+    margin-top: 150px;
+    margin-right:200px;
+    border-radius: 50%;
+  }
+  
+  .editPicture {
+    position: relative;
+    width: fit-content;
+  }
+  .editPicture img:hover {
+    transform: scale(1.1);
+  }
+  
+  .editPicture img {
+    position: absolute;
+    bottom: 70px;
+    left:340px;
+    width: 20px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 200px;
+    margin-right: 300px;
+}
+.saveButton:hover {
+    transform: scale(1.1);
+  }
+  
+  .saveButton {
+    margin-top: 10px;
+    width: 11vw;
+    background-color: #0056b3;
+  }
+  
