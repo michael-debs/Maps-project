@@ -15,3 +15,8 @@ body {
   --secondary: #236081;
   --third: #94A3A9;
 }
+
+.resetA {
+  color: black;
+  text-decoration: none;
+}

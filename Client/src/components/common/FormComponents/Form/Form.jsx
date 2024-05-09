@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Input from "../Input/Input";
 import Button from "../../Button/Button";
-import TextArea from "../TextArea/textArea";
+import TextArea from "../TextArea/TextArea";
 import { formPropTypes } from "../../../../constants/PropTypes";
 import ErrorIcon from "../../../Icons/ErrorIcon";
 

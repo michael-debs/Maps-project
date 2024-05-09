@@ -8,14 +8,15 @@ datasource db {
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  firstName String
-  lastName String
-  email String
-  password String
-  bio String?
+  id             Int        @id @default(autoincrement())
+  firstName      String
+  lastName       String
+  email          String
+  password       String
+  bio            String?
   profilePicture String?
   Activity       Activity[]
+  Post           Post[]
 }
 
 model Activity {
@@ -26,4 +27,18 @@ model Activity {
   profile     String
   color       String
   userId      Int
+}
+
+model Post {
+  id           Int    @id @default(autoincrement())
+  title        String
+  content      String
+  likes        Int?
+  lng          Decimal
+  lat          Decimal
+  user         User   @relation(fields: [userId], references: [id])
+  userId       Int
+  parentPost   Post?  @relation("ChildPosts", fields: [parentPostId], references: [id])
+  childPosts   Post[] @relation("ChildPosts")
+  parentPostId Int?
 }

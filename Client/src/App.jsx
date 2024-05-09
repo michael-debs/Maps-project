@@ -10,6 +10,7 @@ import ProfilePage from "./pages/ProfilePage/Profile";
 import Login from "./pages/auth/LoginPage/Login";
 import EditUserProfileHeader from "./pages/EditProfilePage/EditUserProfile";
 import HomePage from "./pages/Home/HomePage";
+import PostPage from "./pages/PostPage/PostPage"
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -54,6 +55,7 @@ function App() {
           }
         />
         <Route path="/user/:id" element={<ProfilePage />} />
+        <Route path="/posts/:id" element={<PostPage />} />
         <Route path="/user/:id/edit" element={<EditUserProfileHeader />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
