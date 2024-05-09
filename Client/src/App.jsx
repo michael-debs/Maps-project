@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ProfilePage from "./pages/ProfilePage/Profile";
 import Login from "./pages/auth/LoginPage/Login";
 import EditUserProfileHeader from "./pages/EditProfilePage/EditUserProfile";
+import HomePage from "./pages/Home/HomePage";
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -28,6 +29,7 @@ function App() {
         theme="light"
       />
       <Routes>
+        <Route path="/" element={<HomePage />} />
         <Route
           path="/register"
           element={
