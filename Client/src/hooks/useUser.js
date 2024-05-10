@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { getUserProfile, updateUserProfile } from "../services/UserService.js";
 import { useAuth } from "../contexts/AuthContext.jsx";
-import { toast } from "react-toastify";
 
 const useUser = (userId) => {
   const {
@@ -18,18 +17,19 @@ const useUser = (userId) => {
   const [isAuthUser, setIsAuthUser] = useState(false);
 
   useEffect(() => {
-    if (authIsLoading) {
-      return;
-    }
     if (isAuthenticated && authenticatedUser.id == userId) {
       setIsAuthUser(true);
       setUser(authenticatedUser);
-    } else {
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authenticatedUser]);
+
+  useEffect(() => {
+    if (!authIsLoading && !isAuthUser) {
       fetchUserData();
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId, authenticatedUser]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId, isAuthUser]);
 
   const fetchUserData = async () => {
     if (workingState.isWorking) {
@@ -44,7 +44,7 @@ const useUser = (userId) => {
       setUser(userData);
     } catch (error) {
       console.error("Failed to fetch user profile:", error);
-      toast.error(error);
+      return { error: error.message }
     } finally {
       setWorkingState({ isWorking: false, action: "" });
     }
@@ -64,9 +64,10 @@ const useUser = (userId) => {
 
       const user = await updateUserProfile(userId, data);
       updateUser(user);
+      return user
     } catch (error) {
       console.error("Failed to update user profile:", error);
-      toast.error(error);
+      return { error: error.message }
     } finally {
       setWorkingState({ isWorking: false, action: "" });
     }

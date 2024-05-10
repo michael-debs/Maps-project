@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../Input/Input";
 import Button from "../../Button/Button";
 import TextArea from "../TextArea/TextArea";
@@ -16,6 +16,15 @@ function Form({
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
+  // Initialize form data with default values from fields prop
+  useEffect(() => {
+    const initialData = {};
+    fields.forEach((field) => {
+      initialData[field.name] = field.value || "";
+    });
+    setFormData(initialData);
+  }, [fields]);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -29,7 +38,7 @@ function Form({
   };
 
   const handleSubmit = async (e) => {
-    setIsLoading(true)
+    setIsLoading(true);
     e.preventDefault();
     const formErrors = {};
 
@@ -56,17 +65,12 @@ function Form({
     } else {
       setErrors(formErrors);
     }
-    setIsLoading(false)
+    setIsLoading(false);
   };
   return (
     <form className={className} onSubmit={handleSubmit}>
       {fields.map((field, i) => (
-        <div
-          style={{
-            maxWidth: "min-content",
-          }}
-          key={i}
-        >
+        <div key={i}>
           {field.type === "textarea" ? (
             <TextArea
               onChange={handleChange}
@@ -84,6 +88,9 @@ function Form({
               name={field.name}
               value={formData[field.name] || ""}
               placeholder={field.placeholder}
+              style={{
+                width: "100%",
+              }}
             />
           )}
 
