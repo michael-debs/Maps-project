@@ -6,6 +6,7 @@ import defaultProfile from "../../assets/images/defaultProfile.png";
 import PencilIcon from "../../components/Icons/PencilIcon";
 import useUser from "../../hooks/useUser";
 import { toast } from "react-toastify";
+import GoBackButton from "../../components/common/GoBackButton/GoBackButton";
 
 function EditUserProfile() {
   const { id } = useParams();
@@ -90,6 +91,7 @@ function EditUserProfile() {
         />
       </section>
       {/* TODO: DELETE User Section */}
+      <GoBackButton />
     </div>
   );
 }
