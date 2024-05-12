@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { getUserProfile, updateUserProfile } from "../services/UserService.js";
+import { getUserProfile, updateUserProfile, deleteUser } from "../services/UserService.js";
 import { useAuth } from "../contexts/AuthContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 const useUser = (userId) => {
   const {
@@ -8,7 +9,9 @@ const useUser = (userId) => {
     updateUser,
     isAuthenticated,
     authIsLoading,
+    logout,
   } = useAuth();
+  const navigate = useNavigate();
   const [workingState, setWorkingState] = useState({
     isWorking: false,
     action: "",
@@ -73,7 +76,32 @@ const useUser = (userId) => {
     }
   };
 
-  return { workingState, user, updateProfile };
+  const deleteAccount = async () => {
+    try {
+      if (!isAuthUser) {
+        throw new Error(
+          `The current authenticated user is not authorized to delete the profile of user with id ${userId}`
+        );
+      }
+      if (workingState.isWorking) {
+        throw new Error(`Already working on: ${workingState.action}`);
+      }
+      setWorkingState({ isWorking: true, action: "deleteAccount" });
+
+      await deleteUser(userId);
+      logout();
+      navigate('/');
+      return true;
+    } catch (error) {
+      console.error("Failed to delete user profile:", error);
+      return { error: error.message };
+    } finally {
+      setWorkingState({ isWorking: false, action: "" });
+    }
+  };
+
+  return { workingState, user, updateProfile, deleteAccount };
 };
+
 
 export default useUser;

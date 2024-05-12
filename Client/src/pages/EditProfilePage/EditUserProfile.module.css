@@ -1,16 +1,34 @@
-body {
-  background-color: #f0f8ff;
-}
 
 .container {
   height: 100vh;
-  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #f0f8ff;
+}
+.rectangle {
+  width: 850px;
+  height: auto;
+  padding: 20px;
+  background-color: #f0f8ff;
+  box-shadow: 5px 5px 15px -1px rgb(33, 118, 160);
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: center;
+  align-items: center;
+ 
+}
+
+.header {
+  position: absolute;
+  top: 20px;
+  left:20px;
 }
 
 .updateProfileSection {
   display: flex;
-  gap: 100px;
+  gap: 75px;
   align-items: center;
   justify-content: center;
 }
@@ -20,9 +38,10 @@ body {
 }
 
 .picture {
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 300px;
   border-radius: 10px;
+  box-shadow: 5px 5px 15px -1px rgb(33, 118, 160);
 }
 
 .editPicture {

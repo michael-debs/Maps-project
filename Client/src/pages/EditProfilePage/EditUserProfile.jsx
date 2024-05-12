@@ -7,10 +7,12 @@ import PencilIcon from "../../components/Icons/PencilIcon";
 import useUser from "../../hooks/useUser";
 import { toast } from "react-toastify";
 import GoBackButton from "../../components/common/GoBackButton/GoBackButton";
+import DeleteButton from "../../components/common/DeleteButton/DeleteButton";
+
 
 function EditUserProfile() {
   const { id } = useParams();
-  const { user, updateProfile } = useUser(id);
+  const { user, updateProfile, deleteAccount} = useUser(id);
   const navigate = useNavigate();
 
   const { profilePicture, changeProfilePicture } = useProfilePicture(user);
@@ -30,12 +32,25 @@ function EditUserProfile() {
     }
   };
 
+  const handleDeleteUser = async () => {
+    const result = await deleteAccount();
+    if (result.error) {
+      toast.error(result.error);
+    } else {
+      toast.success("Account deleted successfully");
+    }
+  };
+
   if (!user) {
     return <h1>Loading...</h1>;
   }
 
+
+
   return (
     <div className={styles.container}>
+      <div className={styles.rectangle}>
+        <h2 className={styles.header}>Edit Profile</h2>
       <section className={styles.updateProfileSection}>
         <div className={styles.pictureContainer}>
           <img
@@ -90,8 +105,9 @@ function EditUserProfile() {
           ]}
         />
       </section>
-      {/* TODO: DELETE User Section */}
       <GoBackButton />
+      <DeleteButton onDelete={handleDeleteUser} />
+    </div>
     </div>
   );
 }
