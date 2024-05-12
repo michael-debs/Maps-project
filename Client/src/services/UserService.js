@@ -21,11 +21,11 @@ export async function updateUserProfile(userId, data) {
 export async function deleteUser(userId) {
   try {
     const response = await axios.delete(`/user/${userId}`);
-    if (response.status !== 200) {
+    if (response.status !== 204) {
       throw new Error(`Failed to delete user profile for user ID ${userId}`);
     }
     return true; 
   } catch (error) {
-    throw new Error(`Failed to delete user profile for user ID ${userId}: ${error.message}`);
+    throw new Error(error.message);
   }
 }

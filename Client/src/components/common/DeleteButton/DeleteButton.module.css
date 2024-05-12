@@ -2,6 +2,15 @@
   position: relative;
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #00000066;
+}
+
 .deleteButton {
   background-color: #ff6b6b;
   color: #fff;
@@ -25,9 +34,9 @@
 }
 
 .confirmContainer {
-  position: absolute;
-  top: 10%;
-  right: 45px;
+  position: fixed;
+  top: calc(50% - 200px);
+  right: calc(50% - 200px);
   display: flex;
   width: 400px;
   height: 400px;

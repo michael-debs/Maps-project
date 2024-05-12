@@ -31,7 +31,12 @@ function EditUserProfile() {
   };
 
   const handleDeleteUser = async () => {
-    await deleteAccount();
+    const result = await deleteAccount();
+    if (result.error) {
+      toast.error(result.error);
+    } else {
+      toast.success("Account deleted successfully");
+    }
   };
 
   if (!user) {

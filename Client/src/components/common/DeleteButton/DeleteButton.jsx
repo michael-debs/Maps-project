@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./DeleteButton.module.css";
 import removeUser from "../../../assets/images/removeUser.png";
@@ -34,6 +34,7 @@ function DeleteButton({onDelete}) {
         <img src={removeUser} className={styles.removeUserPicture} alt="Remove User" />
       </button>
       {confirming && (
+        <>
         <div className={styles.confirmContainer}>
           <div className={styles.imageContainer}>
             <img src={redX} className={styles.redX} alt="Red X" />
@@ -50,6 +51,8 @@ function DeleteButton({onDelete}) {
             </button>
           </div>
         </div>
+        <div className={styles.overlay}></div>
+        </>
       )}
     </div>
   );
