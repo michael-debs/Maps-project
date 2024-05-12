@@ -6,7 +6,9 @@ import defaultProfile from "../../assets/images/defaultProfile.png";
 import PencilIcon from "../../components/Icons/PencilIcon";
 import useUser from "../../hooks/useUser";
 import { toast } from "react-toastify";
+import GoBackButton from "../../components/common/GoBackButton/GoBackButton";
 import DeleteButton from "../../components/common/DeleteButton/DeleteButton";
+
 
 function EditUserProfile() {
   const { id } = useParams();
@@ -103,6 +105,7 @@ function EditUserProfile() {
           ]}
         />
       </section>
+      <GoBackButton />
       <DeleteButton onDelete={handleDeleteUser} />
     </div>
     </div>
