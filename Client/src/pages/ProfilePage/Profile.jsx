@@ -2,6 +2,7 @@ import styles from "./Profile.module.css";
 import UserProfileHeader from "./components/ProfileHeader/UserProfileHeader";
 import { useParams } from "react-router-dom";
 import useUser from "../../hooks/useUser.js";
+import Header from "../../components/common/Header/Header.jsx";
 
 const ProfilePage = () => {
   const { id } = useParams();
@@ -11,7 +12,8 @@ const ProfilePage = () => {
   }
   return (
     <main className={styles.container}>
-      <div className={styles.header}>
+      <div className={styles.body}>
+      <Header />
         <UserProfileHeader user={user} />
       </div>
     </main>

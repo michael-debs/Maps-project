@@ -1,10 +1,10 @@
 
 .container {
-  height: 100vh;
+  height: 88vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0f8ff;
+  background-color: #e0edf9;
 }
 .rectangle {
   width: 850px;
@@ -38,21 +38,21 @@
 }
 
 .picture {
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   border-radius: 10px;
   box-shadow: 5px 5px 15px -1px rgb(33, 118, 160);
 }
 
 .editPicture {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  padding: 10px;
+  bottom: 1px;
+  right: -9px;
+  padding: 5px;
   border-radius: 50%;
-  background-color: white;
-  width: 40px;
-  height: 40px;
+  background-color: #f0f8ff;
+  width: 30px;
+  height: 30px;
   transition: transform 0.3s;
   cursor: pointer;
 }
