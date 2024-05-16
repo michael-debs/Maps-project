@@ -11,7 +11,8 @@ import Login from "./pages/auth/LoginPage/Login";
 import EditUserProfileHeader from "./pages/EditProfilePage/EditUserProfile";
 import HomePage from "./pages/Home/HomePage";
 import PostPage from "./pages/PostPage/PostPage"
-import ActivityPage from "./pages/activity/activityPage";
+import ActivityPage from "./pages/activity/ActivityPage";
+import CreateActivity from "./pages/CreateActivity/CreateActivity"
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -58,6 +59,7 @@ function App() {
         <Route path="/user/:id" element={<ProfilePage />} />
         <Route path="/posts/:id" element={<PostPage />} />
         <Route path="/user/:id/edit" element={<EditUserProfileHeader />} />
+        <Route path="/Create-activity" element={<CreateActivity />} />
         <Route path="/activity/:id" element={<ActivityPage />} />
         <Route path="*" element={<NotFoundPage />} />
 

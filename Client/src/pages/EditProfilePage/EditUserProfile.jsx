@@ -9,10 +9,9 @@ import { toast } from "react-toastify";
 import GoBackButton from "../../components/common/GoBackButton/GoBackButton";
 import DeleteButton from "../../components/common/DeleteButton/DeleteButton";
 
-
 function EditUserProfile() {
   const { id } = useParams();
-  const { user, updateProfile, deleteAccount} = useUser(id);
+  const { user, updateProfile, deleteAccount } = useUser(id);
   const navigate = useNavigate();
 
   const { profilePicture, changeProfilePicture } = useProfilePicture(user);
@@ -45,69 +44,67 @@ function EditUserProfile() {
     return <h1>Loading...</h1>;
   }
 
-
-
   return (
     <div className={styles.container}>
       <div className={styles.rectangle}>
         <h2 className={styles.header}>Edit Profile</h2>
-      <section className={styles.updateProfileSection}>
-        <div className={styles.pictureContainer}>
-          <img
-            className={styles.picture}
-            src={profilePicture || defaultProfile}
-            alt="Profile"
-          />
-          <div className={styles.editPicture}>
-            <label className={styles.label} htmlFor="profilePictureInput">
-              <PencilIcon />
-            </label>
-            <input
-              id="profilePictureInput"
-              type="file"
-              onChange={(e) => changeProfilePicture(e.target.files[0])}
-              hidden
+        <section className={styles.updateProfileSection}>
+          <div className={styles.pictureContainer}>
+            <img
+              className={styles.picture}
+              src={profilePicture || defaultProfile}
+              alt="Profile"
             />
+            <div className={styles.editPicture}>
+              <label className={styles.label} htmlFor="profilePictureInput">
+                <PencilIcon />
+              </label>
+              <input
+                id="profilePictureInput"
+                type="file"
+                onChange={(e) => changeProfilePicture(e.target.files[0])}
+                hidden
+              />
+            </div>
           </div>
-        </div>
-        <Form
-          className={styles.form}
-          onSubmit={handleFormSubmit}
-          submitButtonProps={{
-            className: styles.saveButton,
-            variant: "secondary",
-            children: "Save Changes",
-          }}
-          fields={[
-            {
-              label: "First Name",
-              name: "firstName",
-              type: "text",
-              value: user.firstName,
-              required: true,
-              placeholder: "Enter your first name",
-            },
-            {
-              label: "Last Name",
-              name: "lastName",
-              type: "text",
-              value: user.lastName,
-              required: true,
-              placeholder: "Enter your last name",
-            },
-            {
-              label: "Bio",
-              name: "bio",
-              type: "textarea",
-              value: user.bio || "",
-              placeholder: "Enter a short bio",
-            },
-          ]}
-        />
-      </section>
-      <GoBackButton />
-      <DeleteButton onDelete={handleDeleteUser} />
-    </div>
+          <Form
+            className={styles.form}
+            onSubmit={handleFormSubmit}
+            submitButtonProps={{
+              className: styles.saveButton,
+              variant: "secondary",
+              children: "Save Changes",
+            }}
+            fields={[
+              {
+                label: "First Name",
+                name: "firstName",
+                type: "text",
+                value: user.firstName,
+                required: true,
+                placeholder: "Enter your first name",
+              },
+              {
+                label: "Last Name",
+                name: "lastName",
+                type: "text",
+                value: user.lastName,
+                required: true,
+                placeholder: "Enter your last name",
+              },
+              {
+                label: "Bio",
+                name: "bio",
+                type: "textarea",
+                value: user.bio || "",
+                placeholder: "Enter a short bio",
+              },
+            ]}
+          />
+        </section>
+        <GoBackButton />
+        <DeleteButton onDelete={handleDeleteUser} />
+      </div>
     </div>
   );
 }
