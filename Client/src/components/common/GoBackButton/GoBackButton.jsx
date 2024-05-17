@@ -1,17 +1,17 @@
 import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styles from './GoBackButton.module.css';
 import whiteArrow from '../../../assets/images/whiteArrow.png';
 
-const GoBackButton = () => {
+const GoBackButton = ({ destinationPath }) => {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const goBack = () => {
-    if (location.pathname.includes('edit')) {
+    if (destinationPath) {
+      navigate(destinationPath);
+    } else {
       navigate(-1);
-    } else if (location.pathname.includes('user')) {
-      navigate('/');
     }
   };
 
@@ -21,6 +21,10 @@ const GoBackButton = () => {
       Go Back
     </button>
   );
+};
+
+GoBackButton.propTypes = {
+  destinationPath: PropTypes.string,
 };
 
 export default GoBackButton;

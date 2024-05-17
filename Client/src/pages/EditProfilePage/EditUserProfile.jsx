@@ -46,7 +46,7 @@ function EditUserProfile() {
 
   return (
     <div className={styles.head}>
-      <Header />
+      <Header destinationPath={`/user/${id}`} />
       <div className={styles.container}>
       
         <div className={styles.rectangle}>

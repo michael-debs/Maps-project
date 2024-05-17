@@ -11,7 +11,7 @@ import Login from "./pages/auth/LoginPage/Login";
 import EditUserProfileHeader from "./pages/EditProfilePage/EditUserProfile";
 import HomePage from "./pages/Home/HomePage";
 import PostPage from "./pages/PostPage/PostPage"
-import ActivityPage from "../src/pages/activity/ActivityPage";
+import ActivityPage from "./pages/activity/ActivityPage";
 
 function App() {
   const { isAuthenticated } = useAuth();

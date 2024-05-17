@@ -13,7 +13,7 @@ const ProfilePage = () => {
   return (
     <main className={styles.container}>
       <div className={styles.body}>
-      <Header />
+      <Header destinationPath="/" />
         <UserProfileHeader user={user} />
       </div>
     </main>

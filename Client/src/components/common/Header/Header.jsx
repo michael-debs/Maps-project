@@ -1,15 +1,18 @@
-import React from 'react'
-import styles from './Header.module.css'
-import GoBackButton from '../GoBackButton/GoBackButton'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './Header.module.css';
+import GoBackButton from '../GoBackButton/GoBackButton';
 
-function Header() {
+const Header = ({ destinationPath }) => {
   return (
-    <div>
     <div className={styles.header}>
-        <GoBackButton />
+      <GoBackButton destinationPath={destinationPath} />
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default Header
+Header.propTypes = {
+  destinationPath: PropTypes.string,
+};
+
+export default Header;
