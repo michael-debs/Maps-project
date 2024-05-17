@@ -13,12 +13,11 @@ const GoBackButton = ({ destinationPath }) => {
     } else {
       navigate(-1);
     }
-  };
 
   return (
     <button className={styles.button} onClick={goBack}>
-      <img src={whiteArrow} className={styles.picture} alt="Back" />
-      Go Back
+        <img src={whiteArrow} className={styles.picture}/>
+        Go Back
     </button>
   );
 };
@@ -26,5 +25,4 @@ const GoBackButton = ({ destinationPath }) => {
 GoBackButton.propTypes = {
   destinationPath: PropTypes.string,
 };
-
 export default GoBackButton;
