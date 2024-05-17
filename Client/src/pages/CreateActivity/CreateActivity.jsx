@@ -1,23 +1,19 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from './CreateActivity.module.css'
+import styles from "./CreateActivity.module.css";
 import Form from "../../components/common/FormComponents/Form/Form";
 import { toast } from "react-toastify";
 import defaultActivityImage from "../../assets/images/defaultActivity.png";
-import PencilIcon from "../../components/Icons/PencilIcon"; 
-import GoBackButton from "../../components/common/GoBackButton/GoBackButton";
+import PencilIcon from "../../components/Icons/PencilIcon";
 import useActivity from "../../hooks/useActivity";
 
-
-
 function CreateActivity() {
-
   const { createActivity } = useActivity();
   const navigate = useNavigate();
   const { activityPicture, changeActivityPicture } = useActivityPicture();
 
   const handleFormSubmit = async (formData) => {
-   /*  try {
+    try {
       formData.picture = activityPicture;
       const result = await createActivity(formData);
       if (result.error) {
@@ -29,7 +25,6 @@ function CreateActivity() {
     } catch (error) {
       console.error("Failed to create activity:", error);
     }
-*/
   };
 
   return (
@@ -77,12 +72,6 @@ function CreateActivity() {
                 type: "color",
                 required: true,
                 placeholder: "Select pin color",
-                validation: (value) => {
-                  if (usedColors.includes(value)) {
-                    return "Color is already in use. Please choose another one.";
-                  }
-                  return null;
-                },
               },
               {
                 label: "Description",
@@ -93,14 +82,12 @@ function CreateActivity() {
             ]}
           />
         </section>
-        <GoBackButton />
       </div>
     </div>
   );
 }
 
 export default CreateActivity;
-
 
 const useActivityPicture = (activity) => {
   const [activityPicture, setActivityPicture] = useState(null);

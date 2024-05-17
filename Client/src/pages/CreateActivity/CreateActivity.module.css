@@ -1,10 +1,16 @@
-
 .container {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0f8ff;
+  background: radial-gradient(
+    circle,
+    #152e3c,
+    #286586,
+    #82b0c9,
+    #9fbfd1,
+    #f0f8ff
+  );
 }
 .rectangle {
   width: 850px;
@@ -17,13 +23,12 @@
   display: flex;
   flex-direction: center;
   align-items: center;
- 
 }
 
 .header {
   position: absolute;
   top: 20px;
-  left:20px;
+  left: 20px;
 }
 
 .createActivitySection {
