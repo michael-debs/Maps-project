@@ -1,47 +1,67 @@
 import { useEffect, useState } from "react";
 import {
   getUserActivities,
+  getActivityById,
   addActivity,
   updateActivity,
   deleteActivity,
 } from "../services/ActivityService.js";
 import { useAuth } from "../contexts/AuthContext.jsx";
-import { useNavigate } from "react-router-dom";
 
-const useActivity = (userId) => {
+const useActivity = (activityId) => {
   const { user: authenticatedUser, isAuthenticated, authIsLoading } = useAuth();
-  const navigate = useNavigate();
   const [workingState, setWorkingState] = useState({
     isWorking: false,
     action: "",
   });
   const [activities, setActivities] = useState([]);
+  const [activity, setActivity] = useState(null);
   const [isAuthUser, setIsAuthUser] = useState(false);
 
   useEffect(() => {
-    if (isAuthenticated && authenticatedUser.id === userId) {
+    if (isAuthenticated) {
       setIsAuthUser(true);
     }
-  }, [authenticatedUser]);
+  }, [isAuthenticated]);
 
   useEffect(() => {
     if (!authIsLoading && isAuthUser) {
-      fetchUserActivities();
+      if (activityId) {
+        fetchActivity();
+      } else {
+        fetchUserActivities();
+      }
     }
-  }, [userId, isAuthUser]);
+  }, [authIsLoading, isAuthUser, activityId]);
 
   const fetchUserActivities = async () => {
     if (workingState.isWorking) {
-      console.log(workingState);
       throw new Error(`Already working on: ${workingState.action}`);
     }
     setWorkingState({ isWorking: true, action: "fetchUserActivities" });
 
     try {
-      const activitiesData = await getUserActivities(userId);
+      const activitiesData = await getUserActivities(authenticatedUser.id);
       setActivities(activitiesData);
     } catch (error) {
       console.error("Failed to fetch user activities:", error);
+      return { error: error.message };
+    } finally {
+      setWorkingState({ isWorking: false, action: "" });
+    }
+  };
+
+  const fetchActivity = async () => {
+    if (workingState.isWorking) {
+      throw new Error(`Already working on: ${workingState.action}`);
+    }
+    setWorkingState({ isWorking: true, action: "fetchActivity" });
+
+    try {
+      const activityData = await getActivityById(activityId);
+      setActivity(activityData);
+    } catch (error) {
+      console.error("Failed to fetch activity:", error);
       return { error: error.message };
     } finally {
       setWorkingState({ isWorking: false, action: "" });
@@ -73,11 +93,7 @@ const useActivity = (userId) => {
       }
       setWorkingState({ isWorking: true, action: "editActivity" });
 
-      const updatedActivity = await updateActivity(
-        userId,
-        activityId,
-        activityData
-      );
+      const updatedActivity = await updateActivity(authenticatedUser.id, activityId, activityData);
       setActivities((prevActivities) =>
         prevActivities.map((activity) =>
           activity.id === activityId ? updatedActivity : activity
@@ -99,7 +115,7 @@ const useActivity = (userId) => {
       }
       setWorkingState({ isWorking: true, action: "removeActivity" });
 
-      await deleteActivity(userId, activityId);
+      await deleteActivity(authenticatedUser.id, activityId);
       setActivities((prevActivities) =>
         prevActivities.filter((activity) => activity.id !== activityId)
       );
@@ -115,6 +131,7 @@ const useActivity = (userId) => {
   return {
     workingState,
     activities,
+    activity,
     createActivity,
     editActivity,
     removeActivity,
