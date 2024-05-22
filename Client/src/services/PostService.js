@@ -18,6 +18,22 @@ export async function getPostWithId(id) {
   return postData;
 }
 
+export async function createPost(title, content, lng, lat, parentPostId) {
+  const response = await axios.post("/posts/", {
+    title: title,
+    content: content,
+    lng: lng,
+    lat: lat,
+    parentPostId: parentPostId,
+  });
+
+  if (response.status !== 201) {
+    throw new Error("Failed to create post");
+  }
+
+  return await response.data;
+}
+
 // export async function deleteUser(userId) {
 //   const response = await axios.delete(`/posts/${userId}`);
 //   if (response.status !== 200) {

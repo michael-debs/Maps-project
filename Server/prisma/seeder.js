@@ -13,5 +13,5 @@ async function seed() {
 
     await userSeeder();
     await activitySeeder();
-    await postSeeder();
+    await postSeeder({ count: 100 });
 }
