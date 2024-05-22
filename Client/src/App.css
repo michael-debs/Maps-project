@@ -6,10 +6,12 @@
   border: 0;
   box-sizing: border-box;
 }
+
 body {
   font-family: Inter, sans-serif;
   font-size: 16px;
 }
+
 :root {
   --primary: #24668A;
   --secondary: #236081;
@@ -19,4 +21,43 @@ body {
 .resetA {
   color: black;
   text-decoration: none;
+}
+
+.popup>.maplibregl-popup-content {
+  padding: 0;
+}
+
+
+
+
+.post {
+  z-index: 20;
+  padding: 20px;
+  background-color: white;
+
+  -webkit-user-select: none;
+    /*Standard method. Can be used in Safari*/
+    -moz-user-select: none;
+    /*Standard method. Can be used in Firefox*/
+    -ms-user-select: none;
+    /*Standard method. Can be used in Internet Explorer or Edge*/
+    user-select: none;
+    /*Standard method. Can be used in Google Chrome*/
+}
+
+.activityPicture {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 15px;
+}
+
+.post>.postContent {
+  margin-top: 20px;
 }

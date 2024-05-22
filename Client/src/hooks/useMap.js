@@ -20,11 +20,11 @@ const useMap = (container) => {
 
   const addPopup = (lngLat, id, options, html) => {
     const popup = new maptiler.Popup({ closeOnClick: false, ...options })
-      .setLngLat(lngLat)  
+      .setLngLat(lngLat)
       .setHTML(html)
-      .addTo(map.current  );
+      .addTo(map.current);
     setPopups((prevMarkers) => [...prevMarkers, { popup, id }]);
-    return popup
+    return popup;
   };
 
   useEffect(() => {
@@ -33,9 +33,9 @@ const useMap = (container) => {
         container: container,
         apiKey: apiKey,
         geolocate: "POINT",
-        // style: "https://demotiles.maplibre.org/style.json",
-        style: maptiler.MapStyle.STREETS,
-        zoom: 7,
+        style: "https://demotiles.maplibre.org/style.json",
+        // style: maptiler.MapStyle.SATELLITE,
+        zoom: 1,
         draggable: true,
         // minZoom: 8,
       });

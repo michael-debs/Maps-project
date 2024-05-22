@@ -16,6 +16,13 @@ const postService = {
               profilePicture: true,
             },
           },
+          activity: {
+            select: {
+              id: true,
+              name: true,
+              profile: true
+            }
+          }
         },
       });
     } catch (error) {
@@ -53,6 +60,8 @@ const postService = {
           lat: data.lat,
           userId: data.userId,
           parentPostId: data.parentPostId || null,
+         activityId: data.activityId,
+         likes: data.likes
         },
       });
     } catch (error) {
