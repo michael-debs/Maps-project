@@ -1,0 +1,77 @@
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(
+    circle,
+    #152e3c,
+    #286586,
+    #82b0c9,
+    #9fbfd1,
+    #f0f8ff
+  );
+}
+.rectangle {
+  width: 850px;
+  height: 450px;
+  padding: 20px;
+  background-color: #f0f8ff;
+  box-shadow: 5px 5px 15px -1px rgb(33, 118, 160);
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: center;
+  align-items: center;
+}
+
+.header {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.createActivitySection {
+  display: flex;
+  gap: 75px;
+  align-items: center;
+  justify-content: center;
+}
+
+.pictureContainer {
+  position: relative;
+}
+
+.picture {
+  width: 250px;
+  height: 250px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px -1px rgb(33, 118, 160);
+}
+
+.editPicture {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: white;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.editPicture:hover {
+  transform: scale(1.1);
+}
+
+.label {
+  cursor: pointer;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

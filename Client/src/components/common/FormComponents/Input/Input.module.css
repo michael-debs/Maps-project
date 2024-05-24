@@ -1,30 +1,35 @@
 .input {
-    
-    padding: 0.5rem 1rem;
-    margin-top: 4px;
-    font-size: 1rem;
-    border-radius: 8px;
-    border: 3px solid var(--secondary);
+  padding: 0.5rem 1rem;
+  margin-top: 4px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 3px solid var(--secondary);
+  transition: background-color 0.3s ease;
 }
 
 .input:focus {
-    outline: none;
+  outline: none;
 }
 
 .title {
-    font-weight: 550;
-    margin-left: 2px;
-    display: block;
+  font-weight: 550;
+  margin-left: 2px;
+  display: block;
 }
 
 .large {
-    width: 300px;
+  width: 300px;
 }
 
 .small {
-    width: 150px;
+  width: 150px;
 }
 
 .extraSmall {
-    width: 50px;
+  width: 50px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
 }

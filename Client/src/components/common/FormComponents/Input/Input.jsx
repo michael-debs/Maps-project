@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import styles from "./Input.module.css";
+import { useEffect, useRef } from "react";
 
 function Input({
   type,
@@ -9,8 +10,16 @@ function Input({
   size,
   name,
   label,
-    ...rest
+  ...rest
 }) {
+  const inputRef = useRef();
+
+  useEffect(() => {
+    if (type === "color" && inputRef.current) {
+      inputRef.current.style.backgroundColor = value;
+    }
+  }, [type, value]);
+
   const inputClasses = [
     styles.input,
     size === "l" && styles.large,
@@ -19,9 +28,12 @@ function Input({
   ].join(" ");
 
   return (
-    <div>
-      <label htmlFor={name} className={styles.title}>{label}</label>
+    <div className={styles.container}>
+      <label htmlFor={name} className={styles.title}>
+        {label}
+      </label>
       <input
+        ref={inputRef}
         type={type}
         placeholder={placeholder}
         value={value}
@@ -39,7 +51,7 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  size: PropTypes.oneOf(["l", "", "s", "xl"]),
+  size: PropTypes.oneOf(["l", "s", "xs"]),
   name: PropTypes.string,
   label: PropTypes.string.isRequired,
 };

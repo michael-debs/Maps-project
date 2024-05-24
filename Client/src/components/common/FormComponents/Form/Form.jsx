@@ -15,6 +15,7 @@ function Form({
   const [formData, setFormData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const [usedColors, setUsedColors] = useState([]);
 
   // Initialize form data with default values from fields prop
   useEffect(() => {
@@ -23,7 +24,11 @@ function Form({
       initialData[field.name] = field.value || "";
     });
     setFormData(initialData);
+    const colors = fields.filter(field => field.name === 'color').map(field => field.value);
+    setUsedColors(colors);
   }, [fields]);
+
+  
 
   const handleChange = (e) => {
     setFormData({
@@ -55,6 +60,10 @@ function Form({
         formErrors[field.name] = `${field.label} is required`;
       }
     });
+
+    if (formData.color && usedColors.includes(formData.color)) {
+      formErrors.color = "Color is already in use. Please choose another one.";
+    }
 
     if (globalValidation) {
       globalValidation(formData, formErrors);

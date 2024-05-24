@@ -10,7 +10,6 @@ import GoBackButton from "../../components/common/GoBackButton/GoBackButton";
 import DeleteButton from "../../components/common/DeleteButton/DeleteButton";
 import Header from "../../components/common/Header/Header";
 
-
 function EditUserProfile() {
   const { id } = useParams();
   const { user, updateProfile, deleteAccount } = useUser(id);
@@ -47,68 +46,65 @@ function EditUserProfile() {
   }
 
   return (
-    <div className={styles.head}>
-      <Header destinationPath={`/user/${id}`} />
-      <div className={styles.container}>
-      
-        <div className={styles.rectangle}>
-          <h2 className={styles.header}>Edit Profile</h2>
-          <section className={styles.updateProfileSection}>
-            <div className={styles.pictureContainer}>
-              <img
-                className={styles.picture}
-                src={profilePicture || defaultProfile}
-                alt="Profile"
-              />
-              <div className={styles.editPicture}>
-                <label className={styles.label} htmlFor="profilePictureInput">
-                  <PencilIcon />
-                </label>
-                <input
-                  id="profilePictureInput"
-                  type="file"
-                  onChange={(e) => changeProfilePicture(e.target.files[0])}
-                  hidden
-                />
-              </div>
-            </div>
-            <Form
-              className={styles.form}
-              onSubmit={handleFormSubmit}
-              submitButtonProps={{
-                className: styles.saveButton,
-                variant: "secondary",
-                children: "Save Changes",
-              }}
-              fields={[
-                {
-                  label: "First Name",
-                  name: "firstName",
-                  type: "text",
-                  value: user.firstName,
-                  required: true,
-                  placeholder: "Enter your first name",
-                },
-                {
-                  label: "Last Name",
-                  name: "lastName",
-                  type: "text",
-                  value: user.lastName,
-                  required: true,
-                  placeholder: "Enter your last name",
-                },
-                {
-                  label: "Bio",
-                  name: "bio",
-                  type: "textarea",
-                  value: user.bio || "",
-                  placeholder: "Enter a short bio",
-                },
-              ]}
+    <div className={styles.container}>
+      <div className={styles.rectangle}>
+        <h2 className={styles.header}>Edit Profile</h2>
+        <section className={styles.updateProfileSection}>
+          <div className={styles.pictureContainer}>
+            <img
+              className={styles.picture}
+              src={profilePicture || defaultProfile}
+              alt="Profile"
             />
-          </section>
-          <DeleteButton onDelete={handleDeleteUser} />
-        </div>
+            <div className={styles.editPicture}>
+              <label className={styles.label} htmlFor="profilePictureInput">
+                <PencilIcon />
+              </label>
+              <input
+                id="profilePictureInput"
+                type="file"
+                onChange={(e) => changeProfilePicture(e.target.files[0])}
+                hidden
+              />
+            </div>
+          </div>
+          <Form
+            className={styles.form}
+            onSubmit={handleFormSubmit}
+            submitButtonProps={{
+              className: styles.saveButton,
+              variant: "secondary",
+              children: "Save Changes",
+            }}
+            fields={[
+              {
+                label: "First Name",
+                name: "firstName",
+                type: "text",
+                value: user.firstName,
+                required: true,
+                placeholder: "Enter your first name",
+              },
+              {
+                label: "Last Name",
+                name: "lastName",
+                type: "text",
+                value: user.lastName,
+                required: true,
+                placeholder: "Enter your last name",
+              },
+              {
+                label: "Bio",
+                name: "bio",
+                type: "textarea",
+                value: user.bio || "",
+                placeholder: "Enter a short bio",
+              },
+            ]}
+          />
+        </section>
+        <GoBackButton />
+        <DeleteButton onDelete={handleDeleteUser} />
       </div>
     </div>
   );
