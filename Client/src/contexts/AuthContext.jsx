@@ -72,7 +72,7 @@ export function AuthProvider({ children }) {
     localStorage.setItem("token", token)
     setToken(token)
     setUser(user)
-    setAuthIsLoading(true)
+    setIsAuthenticated(true)
   }
 
   async function logout() {

@@ -8,6 +8,7 @@ import useUser from "../../hooks/useUser";
 import { toast } from "react-toastify";
 import GoBackButton from "../../components/common/GoBackButton/GoBackButton";
 import DeleteButton from "../../components/common/DeleteButton/DeleteButton";
+import Header from "../../components/common/Header/Header";
 
 function EditUserProfile() {
   const { id } = useParams();
