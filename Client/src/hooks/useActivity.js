@@ -8,7 +8,7 @@ import {
 } from "../services/ActivityService.js";
 import { useAuth } from "../contexts/AuthContext.jsx";
 
-const useActivity = (activityId) => {
+const useActivity = ({ activityId = null, create = false } = {}) => {
   const { user: authenticatedUser, isAuthenticated, authIsLoading } = useAuth();
   const [workingState, setWorkingState] = useState({
     isWorking: false,
@@ -19,20 +19,30 @@ const useActivity = (activityId) => {
   const [isAuthUser, setIsAuthUser] = useState(false);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (
+      isAuthenticated &&
+      authenticatedUser &&
+      activity &&
+      authenticatedUser.id === activity.userId
+    ) {
       setIsAuthUser(true);
+    } else {
+      setIsAuthUser(false);
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, authenticatedUser, activity]);
 
   useEffect(() => {
-    if (!authIsLoading && isAuthUser) {
+    if (!authIsLoading && isAuthenticated && authenticatedUser) {
+      if (create) {
+        return; // Don't fetch activities if creating a new one
+      }
       if (activityId) {
         fetchActivity();
       } else {
         fetchUserActivities();
       }
     }
-  }, [authIsLoading, isAuthUser, activityId]);
+  }, [authIsLoading, isAuthenticated, authenticatedUser, activityId, create]);
 
   const fetchUserActivities = async () => {
     if (workingState.isWorking) {
@@ -87,13 +97,21 @@ const useActivity = (activityId) => {
   };
 
   const editActivity = async (activityId, activityData) => {
-    try {
-      if (workingState.isWorking) {
-        throw new Error(`Already working on: ${workingState.action}`);
-      }
-      setWorkingState({ isWorking: true, action: "editActivity" });
+    if (!isAuthUser) {
+      throw new Error("User must be the activity admin to edit the activity.");
+    }
 
-      const updatedActivity = await updateActivity(authenticatedUser.id, activityId, activityData);
+    if (workingState.isWorking) {
+      throw new Error(`Already working on: ${workingState.action}`);
+    }
+    setWorkingState({ isWorking: true, action: "editActivity" });
+
+    try {
+      const updatedActivity = await updateActivity(
+        authenticatedUser.id,
+        activityId,
+        activityData
+      );
       setActivities((prevActivities) =>
         prevActivities.map((activity) =>
           activity.id === activityId ? updatedActivity : activity
@@ -109,12 +127,18 @@ const useActivity = (activityId) => {
   };
 
   const removeActivity = async (activityId) => {
-    try {
-      if (workingState.isWorking) {
-        throw new Error(`Already working on: ${workingState.action}`);
-      }
-      setWorkingState({ isWorking: true, action: "removeActivity" });
+    if (!isAuthUser) {
+      throw new Error(
+        "User must be the activity admin to delete the activity."
+      );
+    }
 
+    if (workingState.isWorking) {
+      throw new Error(`Already working on: ${workingState.action}`);
+    }
+    setWorkingState({ isWorking: true, action: "removeActivity" });
+
+    try {
       await deleteActivity(authenticatedUser.id, activityId);
       setActivities((prevActivities) =>
         prevActivities.filter((activity) => activity.id !== activityId)
