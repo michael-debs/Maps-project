@@ -1,27 +1,24 @@
-export function createZones({
-  debug,
-  map,
-  zoneWidth = 20,
-  zoneHeight = 32,
-}) {
+import { shortenParagraph } from "./helper";
+
+export function createZones({ debug, map, zoneWidth = 20, zoneHeight = 32 }) {
   let zones = [];
   let width = zoneWidth;
   let height = zoneHeight;
+  const viewportBounds = map.current.getBounds(); 
+
   for (let i = -180; i <= 180; i = i + width) {
     for (let j = -85; j <= 85; j = j + height) {
-      let x1, x2, y1, y2;
-      if (j + height >= 85) {
-        x1 = i;
-        x2 = i + width;
-        y1 = j;
-        y2 = 85;
-      } else {
-        x1 = i;
-        x2 = i + width;
-        y1 = j;
-        y2 = j + height;
+      let x1 = i;
+      let x2 = Math.min(i + width, 180);
+      let y1 = j;
+      let y2 = Math.min(j + height, 85);
+
+      let zone = { x1, x2, y1, y2, id: zones.length };
+      if (!isZoneInViewport(zone, viewportBounds)) {
+        continue;
       }
-      zones.push({ x1, x2, y1, y2, id: zones.length });
+
+      zones.push(zone);
       if (debug) {
         console.log(
           "i: ",
@@ -57,5 +54,43 @@ export function nodeInZone(node, x1, x2, y1, y2) {
     node[0] < Math.max(x1, x2) &&
     node[1] > Math.min(y1, y2) &&
     node[1] < Math.max(y1, y2)
+  );
+}
+
+export function isZoneInViewport(zone, viewportBounds) {
+  return (
+    zone.x2 >= viewportBounds.getWest() &&
+    zone.x1 <= viewportBounds.getEast() &&
+    zone.y2 >= viewportBounds.getSouth() &&
+    zone.y1 <= viewportBounds.getNorth()
+  );
+}
+
+export function renderPost({ map, post }) {
+  post.content = shortenParagraph(post.content, 160);
+  map.addPopup(
+    [post.lng, post.lat],
+    post.id,
+    { closeButton: false, className: "popup" },
+    `
+          <div class="post">
+            <div class="header">
+              <img class="activityPicture" src="${post.activity.profile}" />
+              <div>
+                <div class="activityName">
+                  ${post.activity.name} 
+                </div>
+                <div class="username">
+                  ${post.user.firstName} ${post.user.lastName} 
+                </div>
+              </div>
+            </div>
+            <div class="postContent">
+              <h1>${post.title}</h1><br>
+              <p>${post.content}</p>
+              <a href="/posts/${post.id}">Read More</a>
+            </div>
+          </div>
+        `
   );
 }
