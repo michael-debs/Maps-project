@@ -43,10 +43,13 @@
 
 /* Name styles */
 .Name {
-  font-size: 18px;
   font-weight: bold;
   display: flex;
   flex-direction: column;
+}
+
+.UserName {
+  font-size: 12px;
 }
 
 /* Date posted styles */
@@ -67,4 +70,22 @@
   font-size: 16px;
   line-height: 1.5;
   padding: 10px;
+}
+.likesComments {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.likes {
+  display: flex;
+  align-items: center;
+}
+
+.likeIcon {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.liked {
+  color: red; /* Change the color of the like icon when it is liked */
 }
