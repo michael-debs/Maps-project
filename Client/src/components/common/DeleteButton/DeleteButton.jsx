@@ -4,7 +4,7 @@ import styles from "./DeleteButton.module.css";
 import removeUser from "../../../assets/images/removeUser.png";
 import redX from "../../../assets/images/redX.png";
 
-function DeleteButton({ onDelete, entityType }) {
+function DeleteButton({ onDelete, children }) {
   const [confirming, setConfirming] = useState(false);
 
   const handleDelete = () => {
@@ -26,7 +26,7 @@ function DeleteButton({ onDelete, entityType }) {
         className={`${styles.deleteButton} ${confirming ? styles.confirming : ""}`}
         onClick={handleDelete}
       >
-        <i>Delete {entityType}{" "}</i>
+        <i>{children}{" "}</i>
         <img src={removeUser} className={styles.removeUserPicture} alt="Remove User" />
       </button>
       {confirming && (
@@ -36,7 +36,7 @@ function DeleteButton({ onDelete, entityType }) {
               <img src={redX} className={styles.redX} alt="Red X" />
             </div>
             <h2 className={styles.question}> Are You Sure? </h2>
-            <p>Do you really want to delete this {entityType}?</p>
+            <p>Do you really want to delete this?</p>
             <p>This process cannot be undone.</p>
             <div className={styles.buttonContainer}>
               <button onClick={confirmDelete} className={styles.Delete}>
@@ -56,7 +56,7 @@ function DeleteButton({ onDelete, entityType }) {
 
 DeleteButton.propTypes = {
   onDelete: PropTypes.func.isRequired,
-  entityType: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default DeleteButton;
