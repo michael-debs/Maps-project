@@ -4,9 +4,7 @@ import styles from "./DeleteButton.module.css";
 import removeUser from "../../../assets/images/removeUser.png";
 import redX from "../../../assets/images/redX.png";
 
-
-
-function DeleteButton({onDelete}) {
+function DeleteButton({ onDelete, entityType }) {
   const [confirming, setConfirming] = useState(false);
 
   const handleDelete = () => {
@@ -25,33 +23,31 @@ function DeleteButton({onDelete}) {
   return (
     <div className={styles.Container}>
       <button
-        className={`${styles.deleteButton} ${
-          confirming ? styles.confirming : ""
-        }`}
+        className={`${styles.deleteButton} ${confirming ? styles.confirming : ""}`}
         onClick={handleDelete}
       >
-        <i>Delete user{" "}</i>
+        <i>Delete {entityType}{" "}</i>
         <img src={removeUser} className={styles.removeUserPicture} alt="Remove User" />
       </button>
       {confirming && (
         <>
-        <div className={styles.confirmContainer}>
-          <div className={styles.imageContainer}>
-            <img src={redX} className={styles.redX} alt="Red X" />
+          <div className={styles.confirmContainer}>
+            <div className={styles.imageContainer}>
+              <img src={redX} className={styles.redX} alt="Red X" />
+            </div>
+            <h2 className={styles.question}> Are You Sure? </h2>
+            <p>Do you really want to delete this {entityType}?</p>
+            <p>This process cannot be undone.</p>
+            <div className={styles.buttonContainer}>
+              <button onClick={confirmDelete} className={styles.Delete}>
+                Delete
+              </button>
+              <button onClick={cancelDelete} className={styles.cancel}>
+                Cancel
+              </button>
+            </div>
           </div>
-          <h2 className={styles.question}> Are You Sure? </h2>
-          <p>Do you really want to delete this account?</p>
-          <p>This process cannot be undone.</p>
-          <div className={styles.buttonContainer}>
-            <button onClick={confirmDelete} className={styles.Delete}>
-              Delete
-            </button>
-            <button onClick={cancelDelete} className={styles.cancel}>
-              Cancel
-            </button>
-          </div>
-        </div>
-        <div className={styles.overlay}></div>
+          <div className={styles.overlay}></div>
         </>
       )}
     </div>
@@ -60,6 +56,7 @@ function DeleteButton({onDelete}) {
 
 DeleteButton.propTypes = {
   onDelete: PropTypes.func.isRequired,
+  entityType: PropTypes.string.isRequired,
 };
 
 export default DeleteButton;
