@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
-import usePost from "../../hooks/usePost";
+import usePosts from "../../hooks/usePosts";
 import defaultProfile from "../../assets/images/defaultProfile.png";
 import styles from "./PostPage.module.css";
 
 function PostPage() {
   const { id } = useParams();
-  const { post } = usePost(id);
+  const { post } = usePosts(id);
 
   return (
     <div className={styles.body}>

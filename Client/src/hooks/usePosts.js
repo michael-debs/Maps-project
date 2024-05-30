@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
-import { getAllPosts } from "../services/PostService";
+import { getAllPosts, getPostWithId } from "../services/PostService";
 
-const usePosts = (postId) => {
+const usePosts = ({ id }) => {
   const [posts, setPosts] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchPost = async () => {
+    const fetchPosts = async () => {
       setIsLoading(true);
       try {
-       const posts = await getAllPosts();
-        setPosts(posts);
+        if (id) {
+          const postData = await getPostWithId(id);
+          setPosts([postData]);
+        } else {
+          const allPosts = await getAllPosts();
+          setPosts(allPosts);
+        }
       } catch (error) {
         setError(error);
       } finally {
@@ -19,8 +24,8 @@ const usePosts = (postId) => {
       }
     };
 
-    fetchPost();
-  }, [postId]);
+    fetchPosts();
+  }, [id]);
 
   return { posts, isLoading, error };
 };
