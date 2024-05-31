@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAllPosts, getPostWithId } from "../services/PostService";
 
-const usePosts = ({ id }) => {
+const usePosts = (id) => {
   const [posts, setPosts] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
