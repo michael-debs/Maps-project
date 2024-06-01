@@ -43,10 +43,13 @@
 
 /* Name styles */
 .Name {
-  font-size: 18px;
   font-weight: bold;
   display: flex;
   flex-direction: column;
+}
+
+.UserName {
+  font-size: 12px;
 }
 
 /* Date posted styles */
@@ -68,3 +71,11 @@
   line-height: 1.5;
   padding: 10px;
 }
+.likesComments {
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+
+

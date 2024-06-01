@@ -1,0 +1,15 @@
+/* HeartIcon.module.css */
+.likeContainer {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .likeCount {
+    margin-right: 8px; /* Adjust the spacing between the like count and the icon as needed */
+  }
+  
+  .heartIcon {
+    transition: fill 0.2s ease-in-out;
+  }
+  
