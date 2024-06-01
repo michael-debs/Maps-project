@@ -41,4 +41,5 @@ Similarly, start the server-side development server by running the following com
 npm run dev
 ```
 
+9. You can seed the database by running ``` npm run seed ``` in the `Server` directory
 

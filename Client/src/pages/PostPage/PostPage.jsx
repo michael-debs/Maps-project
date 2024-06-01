@@ -7,7 +7,7 @@ import HeartIcon from "../../components/Icons/HeartIcon/HeartIcon";
 
 function PostPage() {
   const { id } = useParams();
-  const { post } = usePost(id);
+  const { post } = usePosts(id);
 
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
