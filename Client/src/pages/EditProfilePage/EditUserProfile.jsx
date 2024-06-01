@@ -104,7 +104,7 @@ function EditUserProfile() {
           />
         </section>
         <GoBackButton />
-        <DeleteButton onDelete={handleDeleteUser} />
+        <DeleteButton onDelete={handleDeleteUser}>Delete Activity</DeleteButton>
       </div>
     </div>
   );
