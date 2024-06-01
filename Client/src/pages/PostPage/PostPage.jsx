@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import usePost from "../../hooks/usePost";
 import defaultActivity from "../../assets/images/defaultActivity.png";
 import styles from "./PostPage.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import HeartIcon from "../../components/Icons/HeartIcon/HeartIcon";
 
 function PostPage() {
   const { id } = useParams();
@@ -15,13 +14,15 @@ function PostPage() {
 
   useEffect(() => {
     if (post) {
+      setIsLiked(post.isLiked); // Assuming `post.isLiked` exists in your post object
       setLikeCount(post.likes);
     }
   }, [post]);
 
-  const handleLikeClick = () => {
-    setIsLiked((prevIsLiked) => !prevIsLiked);
-    setLikeCount((prevLikeCount) => prevLikeCount + (isLiked ? -1 : 1));
+  const handleLikeUpdate = (newIsLiked, newLikeCount) => {
+    setIsLiked(newIsLiked);
+    setLikeCount(newLikeCount);
+    // Perform any additional actions, such as updating the backend
   };
 
   if (!post) {
@@ -37,9 +38,7 @@ function PostPage() {
   const formattedDate = post.createdAt
     ? new Date(post.createdAt).toLocaleDateString()
     : "Unknown Date";
-
-  console.log({ post });
-
+    
   return (
     <div className={styles.body}>
       <div className={styles.container}>
@@ -66,15 +65,11 @@ function PostPage() {
         </section>
 
         <section className={styles.likesComments}>
-          <p className={styles.likes}>
-            {likeCount}
-            <FontAwesomeIcon
-              icon={faHeart}
-              className={`${styles.likeIcon} ${isLiked ? styles.liked : ""}`}
-              onClick={handleLikeClick}
-              size="2x"
-            />
-          </p>
+          <HeartIcon
+            initialIsLiked={isLiked}
+            initialLikeCount={likeCount}
+            onLike={handleLikeUpdate}
+          />
         </section>
       </div>
     </div>
