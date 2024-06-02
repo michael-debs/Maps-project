@@ -29,6 +29,7 @@ const postController = {
     try {
       const postData = req.body;
       const user = req.user;
+      console.log(postData);
       const post = await postService.createPost({
         title: postData.title,
         content: postData.content,
@@ -36,6 +37,8 @@ const postController = {
         lat: postData.lat,
         userId: user.id,
         parentPostId: postData.parentPostId,
+        likes: 0,
+        activityId: Number(postData.activityId),
       });
       res.status(201).json(post);
     } catch (error) {

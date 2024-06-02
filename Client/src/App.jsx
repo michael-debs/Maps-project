@@ -14,6 +14,7 @@ import PostPage from "./pages/PostPage/PostPage";
 import ActivityPage from "./pages/activity/ActivityPage";
 import CreateActivity from "./pages/CreateActivity/CreateActivity";
 import EditActivityPage from "./pages/EditActivityPage/EditActivityPage";
+import CreatePostPage from "./pages/CreatePostPage/CreatePostPage";
 
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
           }
         />
         <Route path="/user/:id" element={<ProfilePage />} />
+        <Route path="/posts/add" element={<CreatePostPage />} />
         <Route path="/posts/:id" element={<PostPage />} />
         <Route path="/user/:id/edit" element={<EditUserProfileHeader />} />
         <Route path="/activity/create" element={<CreateActivity />} />

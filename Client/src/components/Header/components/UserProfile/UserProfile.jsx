@@ -1,6 +1,6 @@
-import { userPropTypes } from "../../../../../../constants/PropTypes";
+import { userPropTypes } from "../../../../constants/PropTypes";
 import styles from "./UserProfile.module.css";
-import defaultProfile from "../../../../../../assets/images/defaultProfile.png";
+import defaultProfile from "../../../../assets/images/defaultProfile.png";
 import { Link } from "react-router-dom";
 
 function UserProfile({ user }) {

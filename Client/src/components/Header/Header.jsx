@@ -1,4 +1,4 @@
-import { useAuth } from "../../../../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import LoginButton from "./components/LogInButton/LogInButton";
 import RegisterButton from "./components/RegisterButton/RegisterButton";
 import UserProfile from "./components/UserProfile/UserProfile";
