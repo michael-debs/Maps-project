@@ -7,6 +7,13 @@ export async function getUserActivities(userId) {
   }
   return response.data;
 }
+export async function getActivities() {
+  const response = await axios.get(`/activity`);
+  if (response.status !== 200) {
+    throw new Error(`Failed to fetch activities`);
+  }
+  return response.data;
+}
 
 export async function getActivityById(activityId) {
   const response = await axios.get(`/activity/${activityId}`);

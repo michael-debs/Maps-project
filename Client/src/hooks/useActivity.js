@@ -39,27 +39,27 @@ const useActivity = ({ activityId = null, create = false } = {}) => {
       if (activityId) {
         fetchActivity();
       } else {
-        fetchUserActivities();
+        // fetchUserActivities();
       }
     }
   }, [authIsLoading, isAuthenticated, authenticatedUser, activityId, create]);
 
-  const fetchUserActivities = async () => {
-    if (workingState.isWorking) {
-      throw new Error(`Already working on: ${workingState.action}`);
-    }
-    setWorkingState({ isWorking: true, action: "fetchUserActivities" });
+  // const fetchUserActivities = async () => {
+  //   if (workingState.isWorking) {
+  //     throw new Error(`Already working on: ${workingState.action}`);
+  //   }
+  //   setWorkingState({ isWorking: true, action: "fetchUserActivities" });
 
-    try {
-      const activitiesData = await getUserActivities(authenticatedUser.id);
-      setActivities(activitiesData);
-    } catch (error) {
-      console.error("Failed to fetch user activities:", error);
-      return { error: error.message };
-    } finally {
-      setWorkingState({ isWorking: false, action: "" });
-    }
-  };
+  //   try {
+  //     const activitiesData = await getUserActivities(authenticatedUser.id);
+  //     setActivities(activitiesData);
+  //   } catch (error) {
+  //     console.error("Failed to fetch user activities:", error);
+  //     return { error: error.message };
+  //   } finally {
+  //     setWorkingState({ isWorking: false, action: "" });
+  //   }
+  // };
 
   const fetchActivity = async () => {
     if (workingState.isWorking) {

@@ -18,13 +18,14 @@ export async function getPostWithId(id) {
   return postData;
 }
 
-export async function createPost(title, content, lng, lat, parentPostId) {
+export async function createPost(title, content, lng, lat, activityId,  parentPostId) {
   const response = await axios.post("/posts/", {
     title: title,
     content: content,
-    lng: lng,
-    lat: lat,
+    lng,
+    lat,
     parentPostId: parentPostId,
+    activityId
   });
 
   if (response.status !== 201) {
