@@ -4,7 +4,7 @@ export function createZones({ debug, map, zoneWidth = 20, zoneHeight = 32 }) {
   let zones = [];
   let width = zoneWidth;
   let height = zoneHeight;
-  const viewportBounds = map.current.getBounds(); 
+  const viewportBounds = map.current.getBounds();
 
   for (let i = -180; i <= 180; i = i + width) {
     for (let j = -85; j <= 85; j = j + height) {
@@ -78,10 +78,14 @@ export function renderPost({ map, post }) {
               <img class="activityPicture" src="${post.activity.profile}" />
               <div>
                 <div class="activityName">
-                  ${post.activity.name} 
+                  <a href="/activity/${post.activity.id}" class="resetA">
+                    ${post.activity.name} 
+                  </a>
                 </div>
                 <div class="username">
-                  ${post.user.firstName} ${post.user.lastName} 
+                  <a href="/user/${post.user.id}" class="resetA">
+                    ${post.user.firstName} ${post.user.lastName} 
+                  </a>
                 </div>
               </div>
             </div>

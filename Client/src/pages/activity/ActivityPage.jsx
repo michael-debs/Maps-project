@@ -1,13 +1,29 @@
-import styles from "./ActivityPage.module.css"
+import { useParams } from "react-router-dom";
+import styles from "./ActivityPage.module.css";
+import { useEffect, useState } from "react";
+import { getActivityById } from "../../services/ActivityService";
 
 function ActivityPage() {
-    return (
-        <div className={styles.container}>
-            <img className={styles.image} src="https://th.bing.com/th/id/OIP.Pllr9bqKscUCGIQMMFowGgHaE8?w=800&h=534&rs=1&pid=ImgDetMain"></img>
-            <h2 className={styles.title}>title</h2>
-            <p className={styles.paragraph}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis officiis ipsa sit repudiandae fugiat, magni nemo consequatur molestiae, et ab ullam laudantium voluptatum possimus. Hic nostrum cumque a doloremque quia ullam laudantium. Pariatur sed porro ullam inventore asperiores quae ipsum quam, fugiat natus? Quidem vitae odit sequi nam, perferendis fuga.</p>
-        </div>
-    )
+  const { id } = useParams();
+  const [activity, setActivity] = useState(null);
+
+  useEffect(() => {
+    getActivityById(id).then((activity) => {
+      setActivity(activity);
+    });
+  }, [id]);
+
+  if (!activity) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div className={styles.container}>
+      <img className={styles.image} src={activity.profile}></img>
+      <h2 className={styles.title}>{activity.name}</h2>
+      <p className={styles.paragraph}>{activity.description}</p>
+    </div>
+  );
 }
 
-export default ActivityPage
+export default ActivityPage;

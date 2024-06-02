@@ -80,8 +80,8 @@ function useMapState(map) {
     if (Math.floor(newZoom) !== zoom.current) {
       zoom.current = newZoom;
       setZoneWH([
-        maxWH.current[0] / Math.pow(2, zoom.current),
-        maxWH.current[1] / Math.pow(2, zoom.current),
+        maxWH.current[0] / Math.pow(1.5, zoom.current),
+        maxWH.current[1] / Math.pow(1.5, zoom.current),
       ]);
     }
   };
@@ -91,8 +91,8 @@ function useMapState(map) {
       
       const newZones = createZones({
         map,
-        zoneWidth: maxWH.current[0] / Math.pow(2, zoom.current),
-        zoneHeight: maxWH.current[1] / Math.pow(2, zoom.current),
+        zoneWidth: maxWH.current[0] / Math.pow(1.5, zoom.current),
+        zoneHeight: maxWH.current[1] / Math.pow(1.5, zoom.current),
       });
       // Merge posts into their respective zones
       posts.forEach((post) => {
