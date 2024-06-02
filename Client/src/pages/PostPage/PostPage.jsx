@@ -1,23 +1,26 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import usePost from "../../hooks/usePost";
+import usePosts from "../../hooks/usePosts";
 import defaultActivity from "../../assets/images/defaultActivity.png";
 import styles from "./PostPage.module.css";
 import HeartIcon from "../../components/Icons/HeartIcon/HeartIcon";
+import Header from "../../components/Header/Header"
 
 function PostPage() {
   const { id } = useParams();
-  const { post } = usePosts(id);
+  const { posts } = usePosts(id);
+  const [post, setPost] = useState(null);
 
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
 
   useEffect(() => {
-    if (post) {
-      setIsLiked(post.isLiked); // Assuming `post.isLiked` exists in your post object
-      setLikeCount(post.likes);
+    if (posts) {
+      setPost(posts[0]);
+      setIsLiked(posts[0].isLiked); // Assuming `post.isLiked` exists in your post object
+      setLikeCount(posts[0].likes);
     }
-  }, [post]);
+  }, [posts]);
 
   const handleLikeUpdate = (newIsLiked, newLikeCount) => {
     setIsLiked(newIsLiked);
@@ -26,7 +29,7 @@ function PostPage() {
   };
 
   if (!post) {
-    return <div>No post found</div>;
+    return <div>Loading...</div>;
   }
 
   const activityProfile = post.activity?.profile || defaultActivity;
@@ -38,9 +41,10 @@ function PostPage() {
   const formattedDate = post.createdAt
     ? new Date(post.createdAt).toLocaleDateString()
     : "Unknown Date";
-    
+
   return (
     <div className={styles.body}>
+      <Header />
       <div className={styles.container}>
         <header className={styles.header}>
           <div className={styles.picandname}>
@@ -54,7 +58,6 @@ function PostPage() {
               <div className={styles.UserName}>{userName}</div>
             </div>
           </div>
-          <div className={styles.datePosted}>{formattedDate}</div>
         </header>
 
         <section className={styles.titleSection}>

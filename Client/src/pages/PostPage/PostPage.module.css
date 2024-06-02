@@ -12,10 +12,12 @@
 /* Container styles */
 .container {
   max-width: 800px;
+  min-width: 300px;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 5px 5px 15px 5px #236081;
   background-color: #f0f8ff;
+  margin: 30px;
 }
 
 /* Header styles */
@@ -79,3 +81,8 @@
 
 
 
+@media (min-width: 600px) {
+  .container {
+  min-width: 600px;
+  }
+}
