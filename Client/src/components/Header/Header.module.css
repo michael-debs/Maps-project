@@ -4,7 +4,7 @@
     right: 0;
     left: 0;
     height: 80px;
-    background-color: black;
+    background-color: var(--primary);
 
     display: flex;
     align-items: center;
@@ -17,4 +17,8 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+}
+
+.title {
+    color: white;
 }

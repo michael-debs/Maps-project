@@ -34,7 +34,7 @@ const postService = {
     try {
       const post = await prisma.post.findUnique({
         where: { id },
-        include: { user: true },
+        include: { user: true, activity: true },
       });
       return {
         ...post,

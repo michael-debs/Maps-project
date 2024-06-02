@@ -10,7 +10,9 @@ function Header() {
   return (
     <div className={styles.header}>
       <div className={styles.left}>
-        
+        <h1>
+          <a className={ styles.title + " resetA"} href="/">Maps</a>
+        </h1>
       </div>
       <div className={styles.right}>
         {!authIsLoading ? (
