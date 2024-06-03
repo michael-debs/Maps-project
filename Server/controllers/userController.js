@@ -35,8 +35,19 @@ async function updateUser(req, res) {
   }
 }
 
+async function getUserPostsByUserId(req, res) {
+  try {
+    const { userId } = req.params;
+    const userPosts = await userService.getUserPostsByUserId(userId);
+    res.json(userPosts);
+  } catch (error) {
+    res.status(500).json({ error: error.message || "Internal server error" });
+  }
+}
+
 module.exports = {
   deleteUser,
   getUser,
   updateUser,
+  getUserPostsByUserId,
 };

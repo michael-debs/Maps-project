@@ -38,10 +38,6 @@ function PostPage() {
     ? `${post.user.firstName} ${post.user.lastName}`
     : "Unknown User";
 
-  const formattedDate = post.createdAt
-    ? new Date(post.createdAt).toLocaleDateString()
-    : "Unknown Date";
-
   return (
     <div className={styles.body}>
       <Header />

@@ -112,6 +112,7 @@ async function updateUser({ id, data }) {
     throw new Error(`Error updating user: ${error.message}`);
   }
 }
+
 async function registerUser({ firstName, lastName, email, password }) {
   try {
     // Check if user already exists
@@ -120,7 +121,7 @@ async function registerUser({ firstName, lastName, email, password }) {
       return;
     }
 
-    // Create new 4rfv
+    // Create new user
     const newUser = await createUser({
       email,
       password,
@@ -153,6 +154,7 @@ async function registerUser({ firstName, lastName, email, password }) {
     throw new Error(`Error registering user: ${error.message}`);
   }
 }
+
 async function loginUser({ email, password }) {
   try {
     const user = await findUserWithEmail({ email });
@@ -160,7 +162,7 @@ async function loginUser({ email, password }) {
       return { error: "Invalid email or password" };
     }
 
-    const passwordMatch = await bcrypt.compare(password, user.password)
+    const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
       return { error: "Invalid email or password" };
     }
@@ -190,6 +192,23 @@ async function loginUser({ email, password }) {
   }
 }
 
+async function getUserPostsByUserId(userId) {
+  try {
+    const userPosts = await prisma.post.findMany({
+      where: {
+        userId: parseInt(userId),
+      },
+      include: {
+        user: true, // Including user details if needed
+      },
+    });
+    return userPosts;
+  } catch (error) {
+    console.error(error);
+    throw new Error(`Error fetching posts for user ID ${userId}: ${error.message}`);
+  }
+}
+
 module.exports = {
   findUserWithEmail,
   deleteUser,
@@ -198,4 +217,5 @@ module.exports = {
   loginUser,
   registerUser,
   updateUser,
+  getUserPostsByUserId,
 };

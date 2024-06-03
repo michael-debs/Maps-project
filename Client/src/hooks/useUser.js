@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUserProfile, updateUserProfile, deleteUser } from "../services/UserService.js";
+import { getUserProfile, updateUserProfile, deleteUser, getUserPostsByUserId } from "../services/UserService.js";
 import { useAuth } from "../contexts/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
 
@@ -17,6 +17,7 @@ const useUser = (userId) => {
     action: "",
   });
   const [user, setUser] = useState(null);
+  const [userPosts, setUserPosts] = useState(null);
   const [isAuthUser, setIsAuthUser] = useState(false);
 
   useEffect(() => {
@@ -24,15 +25,22 @@ const useUser = (userId) => {
       setIsAuthUser(true);
       setUser(authenticatedUser);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authenticatedUser]);
 
   useEffect(() => {
     if (!authIsLoading && !isAuthUser) {
       fetchUserData();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId, isAuthUser]);
+
+  useEffect(() => {
+    if (!authIsLoading && isAuthenticated) {
+      fetchUserPosts();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId, isAuthenticated]);
 
   const fetchUserData = async () => {
     if (workingState.isWorking) {
@@ -41,15 +49,24 @@ const useUser = (userId) => {
     }
     setWorkingState({ isWorking: true, action: "fetchUserData" });
 
-    setWorkingState(true);
     try {
       const userData = await getUserProfile(userId);
       setUser(userData);
     } catch (error) {
       console.error("Failed to fetch user profile:", error);
-      return { error: error.message }
+      return { error: error.message };
     } finally {
       setWorkingState({ isWorking: false, action: "" });
+    }
+  };
+
+  const fetchUserPosts = async () => {
+    try {
+      const userPostsData = await getUserPostsByUserId(userId);
+      setUserPosts(userPostsData);
+    } catch (error) {
+      console.error("Failed to fetch user posts:", error);
+      return { error: error.message };
     }
   };
 
@@ -67,10 +84,10 @@ const useUser = (userId) => {
 
       const user = await updateUserProfile(userId, data);
       updateUser(user);
-      return user
+      return user;
     } catch (error) {
       console.error("Failed to update user profile:", error);
-      return { error: error.message }
+      return { error: error.message };
     } finally {
       setWorkingState({ isWorking: false, action: "" });
     }
@@ -90,7 +107,7 @@ const useUser = (userId) => {
 
       await deleteUser(userId);
       logout();
-      navigate('/');
+      navigate("/");
       return true;
     } catch (error) {
       console.error("Failed to delete user profile:", error);
@@ -100,8 +117,7 @@ const useUser = (userId) => {
     }
   };
 
-  return { workingState, user, updateProfile, deleteAccount };
+  return { workingState, user, userPosts, updateProfile, deleteAccount };
 };
-
 
 export default useUser;
