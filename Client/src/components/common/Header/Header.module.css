@@ -1,6 +1,6 @@
 .header{
     display: flex;
-    background: linear-gradient(50deg, #152E3C, #286586, #82B0C9);
+    background-color: var(--primary);
     height: 12vh;
     
    }

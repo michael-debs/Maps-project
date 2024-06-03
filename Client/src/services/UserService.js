@@ -29,3 +29,12 @@ export async function deleteUser(userId) {
     throw new Error(error.message);
   }
 }
+
+export async function getUserPostsByUserId(userId) {
+  const response = await axios.get(`/user/${userId}/posts`);
+  if (response.status != 200) {
+    throw new Error(`Failed to fetch posts for user with id ${userId}`);
+  }
+  const postData = await response.data;
+  return postData;
+}

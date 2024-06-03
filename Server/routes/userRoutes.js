@@ -7,6 +7,7 @@ const authorizationMiddleware = require("../middlewares/authorizationMiddleware"
 const authController = require("../controllers/authController");
 
 router.get("/:userId", userController.getUser);
+router.get("/:userId/posts", userController.getUserPostsByUserId);
 router.post("/", authController.register);
 router.delete(
   "/:userId",
